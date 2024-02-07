@@ -22,18 +22,23 @@ class Play extends Phaser.Scene {
         this.p1duck = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 200, 'duck-walk').setOrigin(0.5, 0).setScale(1.4)
         this.banana = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 300, 'banana').setScale(0.02)
         this.grapes = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 250, 'grapes').setScale(0.02)
-        this.watermelon = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 355, 'watermelon').setScale(0.017)
+        this.watermelon = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 350, 'watermelon').setScale(0.017)
+       
+        this.can = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 200, 'can').setScale(0.017)
+
 
 
 
         // changing physics sizes
-        this.banana.setCircle(this.banana.width / 5)
-        this.banana.setOffset(this.banana.width / 3)
+        // this.banana.setCircle(this.banana.width / 5)
+        this.banana.setSize(this.banana.width / 2, this.banana.height / 2)
+        this.banana.setOffset(this.banana.width / 5, this.banana.height / 4)
 
-        this.grapes.setCircle(this.grapes.width / 4)
-        this.grapes.setOffset(this.grapes.width / 5 + 50)
+        this.grapes.setSize(this.grapes.width / 2, this.grapes.height / 1.5 )
+        this.grapes.setOffset(500, 600)
         
-        this.watermelon.setSize(this.watermelon.width - 10, this.watermelon.height/2)
+        this.watermelon.setSize(this.watermelon.width - 10, this.watermelon.height / 2 + 20)
+        this.watermelon.setOffset(0, 1000)
 
 
         // start animation
@@ -62,9 +67,16 @@ class Play extends Phaser.Scene {
         this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding * 2, this.p1Score, scoreConfig)
         this.gameOver = false
         scoreConfig.fixedWidth = 0
+        this.p1duck.trashCount = 0
     }
 
     update() {
+
+        if(this.p1duck.trashCount >= 3) {
+            // change scene to game over
+            // display score
+
+        }
         
         let playerVector = new Phaser.Math.Vector2(0, 0)
         let playerDirection = 'down'
@@ -80,25 +92,16 @@ class Play extends Phaser.Scene {
                 playerDirection = 'down'
             }
         }
-
         playerVector.normalize()
-
         this.p1duck.setVelocity(this.PLAYER_VELOCITY * playerVector.x, this.PLAYER_VELOCITY * playerVector.y)
-
-        // let playerMovement
-        // playerVector.length() ? playerMovement = 'walking' : playerMovement = 'idle'
-        // this.p1duck.play(playerMovement)
-
-
-
-
         
-        // if(Phaser.Input.Keyboard.JustDown(keyFIRE)){
-        //     this.p1duck.play('walking')
-        // }
+
+
         // if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyRESET)) {
         //     this.scene.restart()
         // }
+
+
         // if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
         //     this.scene.start("menuScene")
         // }
@@ -110,9 +113,13 @@ class Play extends Phaser.Scene {
         //     // this.ship03.update()
         // }
 
+
+        // destroying would destroy every instance,, need to change so it deletes the single instance
         this.physics.add.collider(this.p1duck, this.banana, this.handleFruitCollision, null, this, this.banana)
         this.physics.add.collider(this.p1duck, this.grapes, this.handleFruitCollision, null, this, this.grapes)
         this.physics.add.collider(this.p1duck, this.watermelon, this.handleFruitCollision, null, this, this.watermelon)
+        
+        this.physics.add.collider(this.p1duck, this.can, this.handleTrashCollision, null, this, this.can)
 
 
 
@@ -160,15 +167,31 @@ class Play extends Phaser.Scene {
         //maybe make banana have flash animation or something
 
         fruit.destroy()
-        // this.sound.play('collect')
+        this.sound.play('collect')
         this.p1Score += 5
         this.scoreLeft.text = this.p1Score
+        this.PLAYER_VELOCITY *= 1.05
 
     }
 
-    // duckReset(){
-    //     // blink white
-    //     //play sfx
-    // }
+    handleTrashCollision(duck, trash){
+
+        // make duck blink white
+
+        // maybe eyes change
+
+        trash.destroy()
+        this.sound.play('ping')
+        // this.p1Score()           // change score ?
+        // run into 3, end game ?
+        this.p1duck.trashCount += 1
+        this.PLAYER_VELOCITY = 100
+    }
 
 }
+
+
+
+// increase player velocity for points attained
+// reset player velocity when colliding with obstacle
+
