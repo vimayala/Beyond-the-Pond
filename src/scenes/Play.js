@@ -5,6 +5,13 @@ class Play extends Phaser.Scene {
 
     init() {
         this.PLAYER_VELOCITY = 100
+
+        // fruit/scrolling speed consistent ??
+        this.FRUIT_SPEED = 1.75
+        this.TRASH_SPEED = 2
+
+        // add water/hydration + depletion
+
     }
 
     create() {
@@ -25,8 +32,6 @@ class Play extends Phaser.Scene {
         this.watermelon = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 350, 'watermelon').setScale(0.017)
        
         this.can = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 200, 'can').setScale(0.017)
-
-
 
 
         // changing physics sizes
@@ -75,6 +80,13 @@ class Play extends Phaser.Scene {
     }
 
     update() {
+
+
+        this.banana.x -= this.FRUIT_SPEED
+        this.grapes.x -= this.FRUIT_SPEED
+        this.watermelon.x -= this.FRUIT_SPEED
+
+        this.can.x -= this.TRASH_SPEED
 
         if(this.p1duck.trashCount >= 3) {
             // change scene to game over
