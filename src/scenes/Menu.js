@@ -4,7 +4,11 @@ class Menu extends Phaser.Scene {
     }
 
     preload() {
+        this.load.audio('collect', 'assets/zapsplat_multimedia_game_sound_collect_treasure_coin_001_40559.mp3')
         this.load.image('park', 'assets/park-temp.png')
+        this.load.image('banana', 'assets/banana.png')
+        this.load.image('watermelon', 'assets/watermelon.png')
+        this.load.image('grapes', 'assets/grapes.png')
         this.load.spritesheet('duck-walk', './assets/duck-walks-blinks.png', {
             frameWidth: 64,
             frameHeight: 64,
@@ -24,24 +28,13 @@ class Menu extends Phaser.Scene {
 
         this.anims.create({
             key: 'walking',
-            frameRate: 9,
+            frameRate: 8,
             repeat: -1,
             frames: this.anims.generateFrameNumbers('duck-walk', {
                 start: 0,
                 end: 11
             })
         })
-
-        this.anims.create({
-            key: 'idle',
-            frameRate: 9,
-            repeat: -1,
-            frames: this.anims.generateFrameNumbers('duck-idle', {
-                start: 0,
-                end: 8
-            })
-        })
-
 
         let menuConfig = {
             fontFamily: 'American Typewriter',
@@ -59,7 +52,7 @@ class Menu extends Phaser.Scene {
         this.add.text(game.config.width/2, game.config.height/2, 'Use ←→ arrows to move & (F) to fire', menuConfig).setOrigin(0.5)
         menuConfig.backgroundColor = '#00FF00'
         menuConfig.color = '#000'
-        // this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Press ← for Novice or → for Expert', menuConfig).setOrigin(0.5)
+        this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Press ← for Novice or → for Expert', menuConfig).setOrigin(0.5)
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT)
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT)
     }
