@@ -19,7 +19,7 @@ class Play extends Phaser.Scene {
         this.park = this.add.tileSprite(0, 0, 720, 480, 'park').setOrigin(0, 0)
         
         // this.p1duck = new Duck(this, game.config.width/2, game.config.height- borderUISize - borderPadding - 100, 'duck-walk').setOrigin(0.5, 0)
-        this.p1duck = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 200, 'duck-walk').setOrigin(0.5, 0).setScale(1.4)
+        this.p1duck = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 100, 'duck-walk').setOrigin(0.5, 0).setScale(1.4)
         this.banana = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 300, 'banana').setScale(0.02)
         this.grapes = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 250, 'grapes').setScale(0.02)
         this.watermelon = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 350, 'watermelon').setScale(0.017)
@@ -39,6 +39,10 @@ class Play extends Phaser.Scene {
         
         this.watermelon.setSize(this.watermelon.width - 10, this.watermelon.height / 2 + 20)
         this.watermelon.setOffset(0, 1000)
+
+        this.can.setSize(this.can.width / 1.75, this.can.height / 2 - 200)
+        this.can.setOffset(350, 750)
+
 
 
         // start animation
