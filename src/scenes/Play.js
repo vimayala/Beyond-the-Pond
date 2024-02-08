@@ -26,24 +26,36 @@ class Play extends Phaser.Scene {
         this.park = this.add.tileSprite(0, 0, 720, 480, 'park').setOrigin(0, 0)
         
         // this.p1duck = new Duck(this, game.config.width/2, game.config.height- borderUISize - borderPadding - 100, 'duck-walk').setOrigin(0.5, 0)
-        this.p1duck = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 100, 'duck-walk').setOrigin(0.5, 0).setScale(1.4)
-        this.banana = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 300, 'banana').setScale(0.02)
+        this.p1duck = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 200, 'duck-walk').setOrigin(0.5, 0).setScale(1.4)
+        // this.banana = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 300, 'banana').setScale(0.02)
         this.grapes = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 250, 'grapes').setScale(0.02)
         this.watermelon = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 350, 'watermelon').setScale(0.017)
        
         this.can = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 200, 'can').setScale(0.017)
 
 
+
+        this.bananasss = this.physics.add.group();
+
+        for (var i = 0; i < 3; i++) {
+            console.log(i)
+            var x = Phaser.Math.RND.between(0, game.config.width);
+            var y = Phaser.Math.RND.between(150, game.config.height);
+    
+            var banan = this.physics.add.sprite(x, y, 'banana').setScale(0.02);
+        }
+
         // changing physics sizes
         // this.banana.setCircle(this.banana.width / 5)
-        this.banana.setSize(this.banana.width / 2, this.banana.height / 2)
-        this.banana.setOffset(this.banana.width / 5, this.banana.height / 4)
+
+        // this.banana.setSize(this.banana.width / 2, this.banana.height / 2)
+        // this.banana.setOffset(this.banana.width / 5, this.banana.height / 4)
 
         this.grapes.setSize(this.grapes.width / 2, this.grapes.height / 1.5 )
         this.grapes.setOffset(500, 600)
         
-        this.watermelon.setSize(this.watermelon.width - 10, this.watermelon.height / 2 + 20)
-        this.watermelon.setOffset(0, 1000)
+        this.watermelon.setSize(this.watermelon.width - 10, this.watermelon.height / 2 + 200)
+        this.watermelon.setOffset(0, 950)
 
         this.can.setSize(this.can.width / 1.75, this.can.height / 2 - 200)
         this.can.setOffset(350, 750)
@@ -81,8 +93,8 @@ class Play extends Phaser.Scene {
 
     update() {
 
-
-        this.banana.x -= this.FRUIT_SPEED
+        // console.log(this.banana.width)
+        // this.banana.x -= this.FRUIT_SPEED
         this.grapes.x -= this.FRUIT_SPEED
         this.watermelon.x -= this.FRUIT_SPEED
 
@@ -139,28 +151,6 @@ class Play extends Phaser.Scene {
 
 
 
-
-
-            //per fruit for diff deletion??
-
-
-
-        // if(this.checkCollision(this.p1duck, this.ship03)) {
-        //     // console.log('kaboom ship 03')
-        //     this.p1duck.reset()
-        //     this.shipExplode(this.ship03)
-        // }
-        // if(this.checkCollision(this.p1duck, this.ship02)) {
-        //     this.p1duck.reset()
-        //     this.shipExplode(this.ship02)
-
-        // }
-        // if(this.checkCollision(this.p1duck, this.ship01)) {
-        //     this.p1duck.reset()
-        //     this.shipExplode(this.ship01)
- 
-        // }
-
                 // Simulate scrolling
                 // subtract from y pos every update per
                 // obstacle
@@ -169,7 +159,12 @@ class Play extends Phaser.Scene {
 
 
 
-
+        // if(this.banana.x < -this.banana.x - 100){
+        //     this.banana.destroy()
+        // }
+        if(this.grapes.x < -this.grapes.x - 100){
+            this.grapes.destroy()
+        }
 
 
     }
