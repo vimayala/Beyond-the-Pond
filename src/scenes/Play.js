@@ -9,6 +9,7 @@ class Play extends Phaser.Scene {
         // fruit/scrolling speed consistent ??
         this.FRUIT_SPEED = 1.75
         this.TRASH_SPEED = 2
+        this.BANANA_COUNT = 0
 
         // add water/hydration + depletion
 
@@ -28,10 +29,10 @@ class Play extends Phaser.Scene {
         // this.p1duck = new Duck(this, game.config.width/2, game.config.height- borderUISize - borderPadding - 100, 'duck-walk').setOrigin(0.5, 0)
         this.p1duck = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 200, 'duck-walk').setOrigin(0.5, 0).setScale(1.4)
         // this.banana = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 300, 'banana').setScale(0.02)
-        this.grapes = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 250, 'grapes').setScale(0.02)
+        this.grapes = this.physics.add.sprite(350, game.config.height- borderUISize - borderPadding - 200, 'grapes').setScale(0.02)
         this.watermelon = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 350, 'watermelon').setScale(0.017)
        
-        this.can = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 200, 'can').setScale(0.017)
+        this.can = this.physics.add.sprite(350, game.config.height- borderUISize - borderPadding - 200, 'can').setScale(0.017)
 
 
 
@@ -42,7 +43,14 @@ class Play extends Phaser.Scene {
             var x = Phaser.Math.RND.between(0, game.config.width);
             var y = Phaser.Math.RND.between(150, game.config.height);
     
-            var banan = this.physics.add.sprite(x, y, 'banana').setScale(0.02);
+            var banan = this.physics.add.sprite(x, y, 'banana').setScale(0.02).setImmovable(true);
+            banan.num = this.BANANA_COUNT
+            // banan.setImmovable(true)
+
+            banan.setOffset(banan.width / 5, banan.height / 4).setSize(banan.width / 2, banan.height / 2)
+
+            this.bananasss.add(banan)
+            this.BANANA_COUNT += 1
         }
 
         // changing physics sizes
@@ -143,12 +151,15 @@ class Play extends Phaser.Scene {
 
 
         // destroying would destroy every instance,, need to change so it deletes the single instance
-        this.physics.add.collider(this.p1duck, this.banana, this.handleFruitCollision, null, this, this.banana)
-        this.physics.add.collider(this.p1duck, this.grapes, this.handleFruitCollision, null, this, this.grapes)
-        this.physics.add.collider(this.p1duck, this.watermelon, this.handleFruitCollision, null, this, this.watermelon)
+        // this.physics.add.collider(this.p1duck, this.banana, this.handleFruitCollision, null, this, this.banana)
+        // this.physics.add.collider(this.p1duck, this.grapes, this.handleFruitCollision, null, this, this.grapes)
+        // this.physics.add.collider(this.p1duck, this.watermelon, this.handleFruitCollision, null, this, this.watermelon)
+        // this.physics.add.collider(this.p1duck, this.can, this.handleTrashCollision, null, this, this.can)
         
         this.physics.add.collider(this.p1duck, this.can, this.handleTrashCollision, null, this, this.can)
 
+
+        this.physics.add.collider(this.p1duck, this.bananasss, this.handleFruitCollision, null, this, this.bananasss)
 
 
                 // Simulate scrolling
@@ -168,6 +179,16 @@ class Play extends Phaser.Scene {
 
 
     }
+
+    // handleFruitGroupCollision(duck, fruitGroup){
+
+    //     fruitGroup.destroy()
+    //     this.sound.play('collect')
+    //     this.p1Score += 5
+    //     this.scoreLeft.text = this.p1Score
+    //     this.PLAYER_VELOCITY *= 1.05
+
+    // }
 
     handleFruitCollision(duck, fruit){
 
