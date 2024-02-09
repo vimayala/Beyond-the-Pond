@@ -7,12 +7,21 @@ class Menu extends Phaser.Scene {
         this.load.audio('collect', 'assets/zapsplat_multimedia_game_sound_collect_treasure_coin_001_40559.mp3')
         this.load.audio('ping', 'assets/zapsplat_multimedia_game_sound_childrens_collect_grab_single_norification_ping_soft_002_49762.mp3')
 
-        this.load.image('park', 'assets/park-temp.png')
+        this.load.image('park', 'assets/park.png')
+        this.load.image('tree', 'assets/tree.png')
         this.load.image('banana', 'assets/banana.png')
         this.load.image('watermelon', 'assets/watermelon.png')
         this.load.image('grapes', 'assets/grapes.png')
         this.load.image('can', 'assets/can.png')
+        this.load.image('chips', 'assets/chips.png')
 
+
+        this.load.spritesheet('trash-stinks', './assets/trash-stinks.png', {
+            frameWidth: 1280,
+            frameHeight: 1280,
+            startFrame: 0,
+            endFrame: 3
+        })
         this.load.spritesheet('duck-walk', './assets/duck-walks-blinks.png', {
             frameWidth: 64,
             frameHeight: 64,

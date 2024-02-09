@@ -7,9 +7,12 @@ class Play extends Phaser.Scene {
         this.PLAYER_VELOCITY = 100
 
         // fruit/scrolling speed consistent ??
-        this.FRUIT_SPEED = 1.75
+        this.SCROLL_SPEED = 1.75
         this.TRASH_SPEED = 2
-        this.BANANA_COUNT = 0
+
+        this.xArray = [0, 50, 100, 250, 300, 350, 400]
+
+        // this.BANANA_COUNT = 0
 
         // add water/hydration + depletion
 
@@ -24,33 +27,38 @@ class Play extends Phaser.Scene {
         this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0,0)  
 
         // images
-        this.park = this.add.tileSprite(0, 0, 720, 480, 'park').setOrigin(0, 0)
+        this.park = this.add.tileSprite(0, 0, 14400, 9600, 'park').setOrigin(0,0).setScale(0.05)
         
         // this.p1duck = new Duck(this, game.config.width/2, game.config.height- borderUISize - borderPadding - 100, 'duck-walk').setOrigin(0.5, 0)
         this.p1duck = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 200, 'duck-walk').setOrigin(0.5, 0).setScale(1.4)
         // this.banana = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 300, 'banana').setScale(0.02)
         this.grapes = this.physics.add.sprite(350, game.config.height- borderUISize - borderPadding - 200, 'grapes').setScale(0.02)
         this.watermelon = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 350, 'watermelon').setScale(0.017)
-       
-        this.can = this.physics.add.sprite(350, game.config.height- borderUISize - borderPadding - 200, 'can').setScale(0.017)
+        
 
+        this.can = this.physics.add.sprite(350, game.config.height- borderUISize - borderPadding - 200, 'can').setScale(0.017)
+        this.chips = this.physics.add.sprite(350, game.config.height- borderUISize - borderPadding - 300, 'chips').setScale(0.045)
+        this.trash = this.physics.add.sprite(350, game.config.height- borderUISize - borderPadding - 200, 'trash-stinks').setScale(0.04)
+
+        // ideal tree size
+        // this.tree = this.add.image(100, 100, 'tree').setScale(0.09)
 
 
         this.bananasss = this.physics.add.group();
 
-        for (var i = 0; i < 3; i++) {
+        // make delayed call ?? or initially 3, then delayed ?
+        for (var i = 1; i < 16; i++) {
             console.log(i)
             var x = Phaser.Math.RND.between(0, game.config.width);
-            var y = Phaser.Math.RND.between(150, game.config.height);
-    
-            var banan = this.physics.add.sprite(x, y, 'banana').setScale(0.02).setImmovable(true);
-            banan.num = this.BANANA_COUNT
-            // banan.setImmovable(true)
+            var y = Phaser.Math.RND.between(200, game.config.height);
+            console.log('x:')
+            var banan = this.physics.add.sprite((i % 7) * x, 350, 'banana').setScale(0.02).setImmovable(true);
+            // banan.num = this.BANANA_COUNT
 
             banan.setOffset(banan.width / 5, banan.height / 4).setSize(banan.width / 2, banan.height / 2)
 
             this.bananasss.add(banan)
-            this.BANANA_COUNT += 1
+            // this.BANANA_COUNT += 1
         }
 
         // changing physics sizes
@@ -100,11 +108,11 @@ class Play extends Phaser.Scene {
     }
 
     update() {
+        this.park.tilePositionX += (5 * this.SCROLL_SPEED)
 
-        // console.log(this.banana.width)
-        // this.banana.x -= this.FRUIT_SPEED
-        this.grapes.x -= this.FRUIT_SPEED
-        this.watermelon.x -= this.FRUIT_SPEED
+        this.bananasss.getChildren().forEach( (banana => {banana.x -= this.SCROLL_SPEED}))
+        this.grapes.x -= this.SCROLL_SPEED
+        this.watermelon.x -= this.SCROLL_SPEED
 
         this.can.x -= this.TRASH_SPEED
 
