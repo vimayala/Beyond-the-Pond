@@ -7,6 +7,7 @@ class Menu extends Phaser.Scene {
         this.load.audio('collect', 'assets/zapsplat_multimedia_game_sound_collect_treasure_coin_001_40559.mp3')
         this.load.audio('ping', 'assets/zapsplat_multimedia_game_sound_childrens_collect_grab_single_norification_ping_soft_002_49762.mp3')
 
+        this.load.image('clouds', 'assets/clouds.png')
         this.load.image('park', 'assets/park.png')
         this.load.image('tree', 'assets/tree.png')
         this.load.image('banana', 'assets/banana.png')
@@ -15,6 +16,8 @@ class Menu extends Phaser.Scene {
         this.load.image('can', 'assets/can.png')
         this.load.image('chips', 'assets/chips.png')
 
+        this.load.image('button', 'assets/button.PNG')
+        this.load.image('frog-button', 'assets/frog-button.PNG')
 
         this.load.spritesheet('trash-stinks', './assets/trash-stinks.png', {
             frameWidth: 1280,
@@ -40,6 +43,17 @@ class Menu extends Phaser.Scene {
     create() {
 
         this.anims.create({
+            key: 'trash-stinky',
+            frameRate: 4,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('trash-stinks', {
+                start: 0,
+                end: 3
+            })
+        })
+
+
+        this.anims.create({
             key: 'walking',
             frameRate: 8,
             repeat: -1,
@@ -52,45 +66,73 @@ class Menu extends Phaser.Scene {
         let menuConfig = {
             fontFamily: 'American Typewriter',
             fontSize: '28px', 
-            backgroundColor: '#F3B141', 
-            color: '#843605',
+            backgroundColor: '#B1D5EF', 
+            color: '#FFFFFF',
             align: 'right', padding: {
                 top: 5,
                 bottom: 5,
             },
             fixedWidth: 0
         }
-        // this.add.bitmapText(game.config.width/2, game.config.height/2 - borderUISize - borderPadding,  'pixeboy', 'Beyond The Pong!').setOrigin(0.5)
+
+
+
+        this.clouds = this.add.tileSprite(0, 0, 14400, 9600, 'clouds').setOrigin(0,0).setScale(0.05)
         this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'Beyond the Pond', menuConfig).setOrigin(0.5)
-        this.add.text(game.config.width/2, game.config.height/2, 'Use ←→ arrows to move & (F) to fire', menuConfig).setOrigin(0.5)
-        menuConfig.backgroundColor = '#00FF00'
-        menuConfig.color = '#000'
-        this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Press ← for Novice or → for Expert', menuConfig).setOrigin(0.5)
+
+
+        menuConfig.fontSize = '18px'
+        menuConfig.color = '#000000'
+        menuConfig.backgroundColor = '#FFFFFF00'
+
+        var height = game.config.height/2 - borderUISize - borderPadding
+
+        this.begin = this.add.image(game.config.width/2, height + 65,'frog-button').setScale(0.1)
+        this.controls = this.add.image(game.config.width/2, height + 125,'button').setScale(0.1)
+        this.credits = this.add.image(game.config.width/2, height + 175,'button').setScale(0.1)
+
+        this.begin.setInteractive({
+            useHandCursor: true
+        })
+        this.controls.setInteractive({
+            useHandCursor: true
+        })
+        this.credits.setInteractive({
+            useHandCursor: true
+        })
+
+        this.add.text(game.config.width/2, height + 70, 'Play', menuConfig).setOrigin(0.5)
+        this.add.text(game.config.width/2, height + 125, 'Controls', menuConfig).setOrigin(0.5)
+        this.add.text(game.config.width/2, height + 175, 'Credits', menuConfig).setOrigin(0.5)
+
+
+        // this.credits = this.add.image(game.config.width/2, game.config.height/2 - borderUISize - borderPadding + 175,'button').setScale(0.1)
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT)
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT)
+
+        this.begin.on('pointerdown', () => {
+            this.scene.start('playScene') 
+        })
+        this.controls.on('pointerdown', () => {
+            this.scene.start('controlScene') 
+        })
+        this.credits.on('pointerdown', () => {
+            this.scene.start('creditsScene') 
+        })
+
     }
 
     update() {
-        if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
-            game.settings = {
-                spaceshipSpeed: 3,
-                gameTimer: 60000
-            }
-            // this.sound.play('sfx-select')
-            this.scene.start('playScene')
-        }
-        if (Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
-            game.settings = {
-                spaceshipSpeed: 4,
-                gameTimer: 45000
-            }
-            // this.sound.play('sfx-select')
-            this.scene.start('playScene')
-        }
+        this.clouds.tilePositionX += 4
+        // if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
+
+        //     game.settings = {
+        //         // spaceshipSpeed: 3,
+        //     }
+
+        //     // this.sound.play('sfx-select')
+        //     this.scene.start('playScene')
+        // }
+
     }
 }
-
-// init() prepares any data for the scene
-// preload() prepares any assets we’ll need for the scene
-// create() adds objects to the scene
-// update() is a loop that runs continuously (every frame, ideally) and allows us to update logic and game objects

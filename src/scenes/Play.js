@@ -48,10 +48,8 @@ class Play extends Phaser.Scene {
 
         // make delayed call ?? or initially 3, then delayed ?
         for (var i = 1; i < 16; i++) {
-            console.log(i)
             var x = Phaser.Math.RND.between(0, game.config.width);
             var y = Phaser.Math.RND.between(200, game.config.height);
-            console.log('x:')
             var banan = this.physics.add.sprite((i % 7) * x, 350, 'banana').setScale(0.02).setImmovable(true);
             // banan.num = this.BANANA_COUNT
 
@@ -80,6 +78,7 @@ class Play extends Phaser.Scene {
 
         // start animation
         this.p1duck.play('walking')
+        this.trash.play('trash-stinky')
 
         // keys defined
         keyFIRE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F)
@@ -160,12 +159,11 @@ class Play extends Phaser.Scene {
 
         // destroying would destroy every instance,, need to change so it deletes the single instance
         // this.physics.add.collider(this.p1duck, this.banana, this.handleFruitCollision, null, this, this.banana)
-        // this.physics.add.collider(this.p1duck, this.grapes, this.handleFruitCollision, null, this, this.grapes)
+        this.physics.add.collider(this.p1duck, this.grapes, this.handleFruitCollision, null, this, this.grapes)
         // this.physics.add.collider(this.p1duck, this.watermelon, this.handleFruitCollision, null, this, this.watermelon)
         // this.physics.add.collider(this.p1duck, this.can, this.handleTrashCollision, null, this, this.can)
         
         this.physics.add.collider(this.p1duck, this.can, this.handleTrashCollision, null, this, this.can)
-
 
         this.physics.add.collider(this.p1duck, this.bananasss, this.handleFruitCollision, null, this, this.bananasss)
 
@@ -177,16 +175,65 @@ class Play extends Phaser.Scene {
                 // background
 
 
-
-        // if(this.banana.x < -this.banana.x - 100){
-        //     this.banana.destroy()
-        // }
-        if(this.grapes.x < -this.grapes.x - 100){
-            this.grapes.destroy()
-        }
+        this.bananasss.getChildren().forEach(banana => {
+            if(banana.x < -banana.x - 100){
+                banana.destroy()
+                // console.log('bye bye banana')
+            }
+            if(this.grapes.x < -this.grapes.x - 100){
+                this.grapes.destroy()
+            }
+            }
+        )
 
 
     }
+
+
+
+    handleFruitCollision(duck, fruit){
+
+        // update collision box
+    
+        // make duck quack or coin collect
+    
+        //maybe make banana have flash animation or something
+    
+        fruit.destroy()
+        this.sound.play('collect')
+        this.p1Score += 5
+        this.scoreLeft.text = this.p1Score
+        this.PLAYER_VELOCITY *= 1.05
+    
+    }
+    
+    handleTrashCollision(duck, trash){
+    
+        // make duck blink white
+    
+        // maybe eyes change
+        
+        duck.setTint(0xf05a4f)
+        this.time.addEvent({ delay: 175, callback: () => {
+            this.p1duck.clearTint()
+            this.time.addEvent({ delay: 100, callback: () => {this.p1duck.setTint(0xf05a4f)}, callbackScope: this});
+            this.time.addEvent({ delay: 125, callback: () => {this.p1duck.clearTint()}, callbackScope: this})
+
+        }, callbackScope: this})
+
+        // this.scene.time.delayedCall(2500, duck.clearTint())
+        // this.scene.time.delayedCall(1500, duck.setTint(0xf05a4f))
+        // this.scene.time.delayedCall(2000, duck.clearTint())
+        trash.destroy()
+        this.sound.play('ping')
+        // this.p1Score()           // change score ?
+        // run into 3, end game ?
+        this.p1duck.trashCount += 1
+        this.PLAYER_VELOCITY = 100
+        
+    }
+
+
 
     // handleFruitGroupCollision(duck, fruitGroup){
 
@@ -198,40 +245,17 @@ class Play extends Phaser.Scene {
 
     // }
 
-    handleFruitCollision(duck, fruit){
-
-        // update collision box
-
-        // make duck quack or coin collect
-
-        //maybe make banana have flash animation or something
-
-        fruit.destroy()
-        this.sound.play('collect')
-        this.p1Score += 5
-        this.scoreLeft.text = this.p1Score
-        this.PLAYER_VELOCITY *= 1.05
-
-    }
-
-    handleTrashCollision(duck, trash){
-
-        // make duck blink white
-
-        // maybe eyes change
-
-        trash.destroy()
-        this.sound.play('ping')
-        // this.p1Score()           // change score ?
-        // run into 3, end game ?
-        this.p1duck.trashCount += 1
-        this.PLAYER_VELOCITY = 100
-    }
-
 }
+
+
+
 
 
 
 // increase player velocity for points attained
 // reset player velocity when colliding with obstacle
 
+
+
+// .setTint()
+    // type: Phaser WEBGL needed to tint
