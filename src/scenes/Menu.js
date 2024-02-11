@@ -16,6 +16,7 @@ class Menu extends Phaser.Scene {
         this.load.image('grapes', 'assets/grapes.png')
         this.load.image('can', 'assets/can.png')
         this.load.image('chips', 'assets/chips.png')
+        this.load.image('trash', 'assets/trash.png')
 
         this.load.image('button', 'assets/button.PNG')
         this.load.image('frog-button', 'assets/frog-button.PNG')
@@ -26,7 +27,7 @@ class Menu extends Phaser.Scene {
 
         this.load.spritesheet('trash-stinks', './assets/trash-stinks.png', {
             frameWidth: 1280,
-            frameHeight: 1280,
+            frameHeight: 980,
             startFrame: 0,
             endFrame: 3
         })

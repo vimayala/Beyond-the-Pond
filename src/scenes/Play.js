@@ -18,6 +18,48 @@ class Play extends Phaser.Scene {
 
     }
 
+    // preload() {
+    //     this.load.audio('collect', 'assets/zapsplat_multimedia_game_sound_collect_treasure_coin_001_40559.mp3')
+    //     this.load.audio('ping', 'assets/zapsplat_multimedia_game_sound_childrens_collect_grab_single_norification_ping_soft_002_49762.mp3')
+
+    //     this.load.image('clouds', 'assets/clouds.png')
+    //     this.load.image('park', 'assets/park.png')
+    //     this.load.image('blue', 'assets/park-temp.png')
+    //     this.load.image('tree', 'assets/tree.png')
+    //     this.load.image('banana', 'assets/banana.png')
+    //     this.load.image('watermelon', 'assets/watermelon.png')
+    //     this.load.image('grapes', 'assets/grapes.png')
+    //     this.load.image('can', 'assets/can.png')
+    //     this.load.image('chips', 'assets/chips.png')
+
+    //     this.load.image('button', 'assets/button.PNG')
+    //     this.load.image('frog-button', 'assets/frog-button.PNG')
+
+    //     this.load.image('up', 'assets/up.png')
+    //     this.load.image('down', 'assets/down.png')
+
+
+    //     this.load.spritesheet('trash-stinks', './assets/trash-stinks.png', {
+    //         frameWidth: 1280,
+    //         frameHeight: 980,
+    //         startFrame: 0,
+    //         endFrame: 3
+    //     })
+    //     this.load.spritesheet('duck-walk', './assets/duck-walks-blinks.png', {
+    //         frameWidth: 64,
+    //         frameHeight: 64,
+    //         startFrame: 0,
+    //         endFrame: 11
+    //     })
+    //     this.load.spritesheet('duck-idle', './assets/duck-idle-blinks.png', {
+    //         frameWidth: 64,
+    //         frameHeight: 64,
+    //         startFrame: 0,
+    //         endFrame: 8
+    //     })
+
+    // }
+
     create() {
 
         // borders
@@ -31,6 +73,7 @@ class Play extends Phaser.Scene {
         
         // this.p1duck = new Duck(this, game.config.width/2, game.config.height- borderUISize - borderPadding - 100, 'duck-walk').setOrigin(0.5, 0)
         this.p1duck = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 200, 'duck-walk').setOrigin(0.5, 0).setScale(1.4)
+        this.p1duck.setCircle(this.p1duck.width / 2.87).setOffset(this.p1duck.width / 5, this.p1duck.width / 9)
         // this.banana = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 300, 'banana').setScale(0.02)
         this.grapes = this.physics.add.sprite(350, game.config.height- borderUISize - borderPadding - 200, 'grapes').setScale(0.02)
         this.watermelon = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 350, 'watermelon').setScale(0.017)
@@ -38,7 +81,14 @@ class Play extends Phaser.Scene {
 
         this.can = this.physics.add.sprite(350, game.config.height- borderUISize - borderPadding - 200, 'can').setScale(0.017)
         this.chips = this.physics.add.sprite(350, game.config.height- borderUISize - borderPadding - 300, 'chips').setScale(0.045)
-        this.trash = this.physics.add.sprite(350, game.config.height- borderUISize - borderPadding - 200, 'trash-stinks').setScale(0.04)
+        // this.chips.setSize(this.chips.width / 1.7, this.chips.height / 2)
+        // this.chips.setOffset(this.chips.width / 5 - 82, this.chips.height / 3)
+
+        this.trash = this.physics.add.sprite(350, game.config.height- borderUISize - borderPadding - 200, 'trash')  
+        this.trash.setSize(920, 600).setOffset(this.trash.width / 15, this.trash.height / 3 + 20)
+      
+        this.trash.setScale(0.04).setOrigin(0)
+
 
         // ideal tree size
         // this.tree = this.add.image(100, 100, 'tree').setScale(0.09)
@@ -53,7 +103,7 @@ class Play extends Phaser.Scene {
             var banan = this.physics.add.sprite((i % 7) * x, 350, 'banana').setScale(0.02).setImmovable(true);
             // banan.num = this.BANANA_COUNT
 
-            banan.setOffset(banan.width / 5, banan.height / 4).setSize(banan.width / 2, banan.height / 2)
+            banan.setOffset(banan.width / 4, banan.height / 4).setSize(banan.width / 5, banan.height / 2)
 
             this.bananasss.add(banan)
             // this.BANANA_COUNT += 1
@@ -78,7 +128,7 @@ class Play extends Phaser.Scene {
 
         // start animation
         this.p1duck.play('walking')
-        this.trash.play('trash-stinky')
+        // this.trash.play('trash-stinky')
 
         // keys defined
         keyFIRE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F)
