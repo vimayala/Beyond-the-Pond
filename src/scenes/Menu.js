@@ -1,6 +1,6 @@
 class Menu extends Phaser.Scene {
     constructor() {
-        super("menuScene")
+        super('menuScene')
     }
 
     preload() {
@@ -9,6 +9,7 @@ class Menu extends Phaser.Scene {
 
         this.load.image('clouds', 'assets/clouds.png')
         this.load.image('park', 'assets/park.png')
+        this.load.image('blue', 'assets/park-temp.png')
         this.load.image('tree', 'assets/tree.png')
         this.load.image('banana', 'assets/banana.png')
         this.load.image('watermelon', 'assets/watermelon.png')
@@ -65,8 +66,8 @@ class Menu extends Phaser.Scene {
 
         let menuConfig = {
             fontFamily: 'American Typewriter',
-            fontSize: '28px', 
-            backgroundColor: '#B1D5EF', 
+            fontSize: '48px', 
+            backgroundColor: '#B1D5EF99', 
             color: '#FFFFFF',
             align: 'right', padding: {
                 top: 5,
@@ -75,10 +76,8 @@ class Menu extends Phaser.Scene {
             fixedWidth: 0
         }
 
-
-
         this.clouds = this.add.tileSprite(0, 0, 14400, 9600, 'clouds').setOrigin(0,0).setScale(0.05)
-        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'Beyond the Pond', menuConfig).setOrigin(0.5)
+        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding - 15, 'Beyond the Pond', menuConfig).setOrigin(0.5)
 
 
         menuConfig.fontSize = '18px'
@@ -101,7 +100,7 @@ class Menu extends Phaser.Scene {
             useHandCursor: true
         })
 
-        this.add.text(game.config.width/2, height + 70, 'Play', menuConfig).setOrigin(0.5)
+        this.add.text(game.config.width/2, height + 75, 'Play', menuConfig).setOrigin(0.5)
         this.add.text(game.config.width/2, height + 125, 'Controls', menuConfig).setOrigin(0.5)
         this.add.text(game.config.width/2, height + 175, 'Credits', menuConfig).setOrigin(0.5)
 
@@ -111,12 +110,15 @@ class Menu extends Phaser.Scene {
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT)
 
         this.begin.on('pointerdown', () => {
+            // play sfx
             this.scene.start('playScene') 
         })
         this.controls.on('pointerdown', () => {
+            // play sfx
             this.scene.start('controlScene') 
         })
         this.credits.on('pointerdown', () => {
+            // play sfx
             this.scene.start('creditsScene') 
         })
 
