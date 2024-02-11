@@ -73,7 +73,7 @@ class Play extends Phaser.Scene {
         
         // this.p1duck = new Duck(this, game.config.width/2, game.config.height- borderUISize - borderPadding - 100, 'duck-walk').setOrigin(0.5, 0)
         this.p1duck = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 200, 'duck-walk').setOrigin(0.5, 0).setScale(1.4)
-        this.p1duck.setCircle(this.p1duck.width / 2.87).setOffset(this.p1duck.width / 5, this.p1duck.width / 9)
+        this.p1duck.setCircle(this.p1duck.width / 2.9).setOffset(this.p1duck.width / 6, this.p1duck.width / 9)
         // this.banana = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 300, 'banana').setScale(0.02)
         this.grapes = this.physics.add.sprite(350, game.config.height- borderUISize - borderPadding - 200, 'grapes').setScale(0.02)
         this.watermelon = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 350, 'watermelon').setScale(0.017)
@@ -85,9 +85,8 @@ class Play extends Phaser.Scene {
         // this.chips.setOffset(this.chips.width / 5 - 82, this.chips.height / 3)
 
         this.trash = this.physics.add.sprite(350, game.config.height- borderUISize - borderPadding - 200, 'trash')  
-        this.trash.setSize(920, 600).setOffset(this.trash.width / 15, this.trash.height / 3 + 20)
-      
-        this.trash.setScale(0.04).setOrigin(0)
+        this.trash.setSize(920, 600).setOffset(this.trash.width / 15, this.trash.height / 3 + 30)
+        this.trash.setScale(0.07).setOrigin(0)
 
 
         // ideal tree size
