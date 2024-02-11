@@ -20,6 +20,10 @@ class Menu extends Phaser.Scene {
         this.load.image('button', 'assets/button.PNG')
         this.load.image('frog-button', 'assets/frog-button.PNG')
 
+        this.load.image('up', 'assets/up.png')
+        this.load.image('down', 'assets/down.png')
+
+
         this.load.spritesheet('trash-stinks', './assets/trash-stinks.png', {
             frameWidth: 1280,
             frameHeight: 1280,
@@ -77,6 +81,7 @@ class Menu extends Phaser.Scene {
         }
 
         this.clouds = this.add.tileSprite(0, 0, 14400, 9600, 'clouds').setOrigin(0,0).setScale(0.05)
+        this.box = this.add.image(game.config.width/2, game.config.height/2 + borderPadding + borderUISize, 'blue').setScale(0.65, 0.5)
         this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding - 15, 'Beyond the Pond', menuConfig).setOrigin(0.5)
 
 
@@ -87,7 +92,7 @@ class Menu extends Phaser.Scene {
         var height = game.config.height/2 - borderUISize - borderPadding
 
         this.begin = this.add.image(game.config.width/2, height + 65,'frog-button').setScale(0.1)
-        this.controls = this.add.image(game.config.width/2, height + 125,'button').setScale(0.1)
+        this.controls = this.add.image(game.config.width/2, height + 126,'button').setScale(0.1)
         this.credits = this.add.image(game.config.width/2, height + 175,'button').setScale(0.1)
 
         this.begin.setInteractive({
@@ -101,7 +106,7 @@ class Menu extends Phaser.Scene {
         })
 
         this.add.text(game.config.width/2, height + 75, 'Play', menuConfig).setOrigin(0.5)
-        this.add.text(game.config.width/2, height + 125, 'Controls', menuConfig).setOrigin(0.5)
+        this.add.text(game.config.width/2, height + 126, 'Controls', menuConfig).setOrigin(0.5)
         this.add.text(game.config.width/2, height + 175, 'Credits', menuConfig).setOrigin(0.5)
 
 
