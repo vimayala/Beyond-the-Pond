@@ -7,10 +7,11 @@ class Play extends Phaser.Scene {
         this.PLAYER_VELOCITY = 100
 
         // fruit/scrolling speed consistent ??
-        this.SCROLL_SPEED = 1.75
         this.TRASH_SPEED = 2
 
         this.xArray = [0, 50, 100, 250, 300, 350, 400]
+
+        // this.SC = "Score: "
 
         // this.BANANA_COUNT = 0
 
@@ -73,7 +74,7 @@ class Play extends Phaser.Scene {
         
         // this.p1duck = new Duck(this, game.config.width/2, game.config.height- borderUISize - borderPadding - 100, 'duck-walk').setOrigin(0.5, 0)
         this.p1duck = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 200, 'duck-walk').setOrigin(0.5, 0).setScale(1.4)
-        this.p1duck.setCircle(this.p1duck.width / 2.9).setOffset(this.p1duck.width / 6, this.p1duck.width / 9)
+        this.p1duck.setCircle(this.p1duck.width / 2.8).setOffset(this.p1duck.width / 6, this.p1duck.width / 20)
         // this.banana = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 300, 'banana').setScale(0.02)
         this.grapes = this.physics.add.sprite(350, game.config.height- borderUISize - borderPadding - 200, 'grapes').setScale(0.02)
         this.watermelon = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 350, 'watermelon').setScale(0.017)
@@ -99,7 +100,7 @@ class Play extends Phaser.Scene {
         for (var i = 1; i < 16; i++) {
             var x = Phaser.Math.RND.between(0, game.config.width);
             var y = Phaser.Math.RND.between(200, game.config.height);
-            var banan = this.physics.add.sprite((i % 7) * x, 350, 'banana').setScale(0.02).setImmovable(true);
+            var banan = this.physics.add.sprite((i % 7) * x, y, 'banana').setScale(0.02).setImmovable(true);
             // banan.num = this.BANANA_COUNT
 
             banan.setOffset(banan.width / 4, banan.height / 4).setSize(banan.width / 5, banan.height / 2)
@@ -107,6 +108,20 @@ class Play extends Phaser.Scene {
             this.bananasss.add(banan)
             // this.BANANA_COUNT += 1
         }
+
+        // var i = 0
+        // this.time.addEvent({ delay: 175, callback: () => {
+
+        //     var x = Phaser.Math.RND.between(0, game.config.width);
+        //     var y = Phaser.Math.RND.between(200, game.config.height);
+        //     var banan = this.physics.add.sprite((i % 7) * x, y, 'banana').setScale(0.02).setImmovable(true);
+        //     // banan.num = this.BANANA_COUNT
+
+        //     banan.setOffset(banan.width / 4, banan.height / 4).setSize(banan.width / 5, banan.height / 2)
+        //     i += 1
+
+        //     this.bananasss.add(banan) 
+        // }})
 
         // changing physics sizes
         // this.banana.setCircle(this.banana.width / 5)
@@ -140,27 +155,30 @@ class Play extends Phaser.Scene {
         this.p1Score = 0
         let scoreConfig = {
             fontFamily: 'Verdana',
-            fontSize: '28px', 
-            backgroundColor: '#F3B141', 
-            color: '#843605',
-            align: 'right', padding: {
-                top: 5,
-                bottom: 5,
+            fontSize: '24px', 
+            backgroundColor: '#B1D5EFE0', 
+            color: '#FFFFFF',
+            align: 'left', padding: {
+                top: 2,
+                bottom: 2,
             },
             fixedWidth: 100
         }
-        this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding * 2, this.p1Score, scoreConfig)
+        this.scoreWord = this.add.text(borderUISize + borderPadding - 40 , borderUISize + borderPadding * 2 - 50, 'Score: ', scoreConfig)
+        scoreConfig.align = 'right'
+        scoreConfig.fontSize = '30px'
+        this.scoreLeft = this.add.text(borderUISize + borderPadding - 40 , borderUISize + borderPadding * 2 - 20, `${this.p1Score}`, scoreConfig)
         this.gameOver = false
         scoreConfig.fixedWidth = 0
         this.p1duck.trashCount = 0
     }
 
     update() {
-        this.park.tilePositionX += (5 * this.SCROLL_SPEED)
+        this.park.tilePositionX += (5 * SCROLL_SPEED)
 
-        this.bananasss.getChildren().forEach( (banana => {banana.x -= this.SCROLL_SPEED}))
-        this.grapes.x -= this.SCROLL_SPEED
-        this.watermelon.x -= this.SCROLL_SPEED
+        this.bananasss.getChildren().forEach( (banana => {banana.x -= SCROLL_SPEED}))
+        this.grapes.x -= SCROLL_SPEED
+        this.watermelon.x -= SCROLL_SPEED
 
         this.can.x -= this.TRASH_SPEED
 
@@ -251,6 +269,7 @@ class Play extends Phaser.Scene {
         fruit.destroy()
         this.sound.play('collect')
         this.p1Score += 5
+        // var strSC = `${this.p1Score}`
         this.scoreLeft.text = this.p1Score
         this.PLAYER_VELOCITY *= 1.05
     
