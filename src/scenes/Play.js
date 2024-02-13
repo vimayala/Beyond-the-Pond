@@ -10,6 +10,7 @@ class Play extends Phaser.Scene {
         this.TRASH_SPEED = 2
 
         this.xArray = [0, 50, 100, 250, 300, 350, 400]
+        this.obstacleSpawnDelay = 2500
 
         // this.SC = "Score: "
 
@@ -85,9 +86,11 @@ class Play extends Phaser.Scene {
         // this.chips.setSize(this.chips.width / 1.7, this.chips.height / 2)
         // this.chips.setOffset(this.chips.width / 5 - 82, this.chips.height / 3)
 
-        this.trash = this.physics.add.sprite(350, game.config.height- borderUISize - borderPadding - 200, 'trash')  
-        this.trash.setSize(920, 600).setOffset(this.trash.width / 15, this.trash.height / 3 + 30)
-        this.trash.setScale(0.07).setOrigin(0)
+        // this.trash = this.physics.add.sprite(350, game.config.height- borderUISize - borderPadding - 200, 'trash-bag')  
+        // this.trash.setSize(920, 600).setOffset(this.trash.width / 15, this.trash.height / 3 + 30)
+        // console.log('og trash')
+        // console.log(this.trash.width / 15)
+        // this.trash.setScale(0.07).setOrigin(0)
 
 
         // ideal tree size
@@ -95,6 +98,11 @@ class Play extends Phaser.Scene {
 
 
         this.bananasss = this.physics.add.group();
+
+        // per trash or whole group ??
+        this.trashGroup = this.physics.add.group({
+            runChildUpdate: true    // make sure update runs on group children
+        })
 
         // make delayed call ?? or initially 3, then delayed ?
         for (var i = 1; i < 16; i++) {
@@ -171,7 +179,48 @@ class Play extends Phaser.Scene {
         this.gameOver = false
         scoreConfig.fixedWidth = 0
         this.p1duck.trashCount = 0
+    
+
+        this.time.delayedCall(this.obstacleSpawnDelay, () => { 
+            this.addBarrier() 
+        })
+
+        // set up difficulty timer (triggers callback every second)
+        this.difficultyTimer = this.time.addEvent({
+            delay: 1000,
+            callback: this.levelBump,
+            callbackScope: this,
+            loop: true
+        })
+
+        // // set up cursor keys
+        // cursors = this.input.keyboard.createCursorKeys()
     }
+
+
+    // Bookmark v
+
+// create new barriers and add them to existing barrier group
+    addBarrier() {
+        // let speedVariance =  Phaser.Math.Between(0, 50)
+        
+        // make array to pick random trash obstacle
+
+        var trashPicked = 'trash-bag'
+
+        let trash = new Trash(this, 'trash-bag', this.TRASH_SPEED)
+        if(trashPicked == 'trash-bag'){
+            console.log('bag')
+            trash.body.setSize(920, 600)
+            trash.body.setOffset(trash.width / 15, trash.height / 3 + 30)
+
+        }
+        trash.setTint('0xFF00FF')
+        this.trashGroup.add(trash)
+        trash.x = game.config.width / 2
+        trash.y = game.config.height / 2
+    }
+
 
     update() {
         this.park.tilePositionX += (5 * SCROLL_SPEED)

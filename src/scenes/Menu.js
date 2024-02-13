@@ -16,7 +16,7 @@ class Menu extends Phaser.Scene {
         this.load.image('grapes', 'assets/grapes.png')
         this.load.image('can', 'assets/can.png')
         this.load.image('chips', 'assets/chips.png')
-        this.load.image('trash', 'assets/trash.png')
+        this.load.image('trash-bag', 'assets/trash.png')
 
         this.load.image('button', 'assets/button.PNG')
         this.load.image('frog-button', 'assets/frog-button.PNG')

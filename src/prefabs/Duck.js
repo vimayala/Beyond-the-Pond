@@ -6,7 +6,7 @@ class Duck extends Phaser.GameObjects.Sprite {
         this.isFiring = false
         this.moveSpeed = 2
         // this.sfxShot = scene.sound.add('sfx-shot')
-        this.scene.physics.add.existing(this);
+        this.scene.physics.add.existing(this)
     }
 
     update () {

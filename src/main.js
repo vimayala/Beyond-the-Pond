@@ -7,7 +7,7 @@
 let config = {
     // type: Phaser.WEBGL,
     parent: 'phaser-game',  // for info text
-    type: Phaser.WEBGL,     // for tinting
+    type: Phaser.AUTO,     // for tinting
     width: 720,
     height: 480,
     zoom: 2,
