@@ -27,6 +27,7 @@ let config = {
 let game = new Phaser.Game(config)
 let keyFIRE, keyRESET, keyLEFT, keyRIGHT, cursors
 
+const trashTypes = ['chips', 'can', 'trash-bag']
 
 let SCROLL_SPEED = 1.75
 

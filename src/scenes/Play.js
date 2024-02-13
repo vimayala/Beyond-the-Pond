@@ -143,8 +143,8 @@ class Play extends Phaser.Scene {
         this.watermelon.setSize(this.watermelon.width - 10, this.watermelon.height / 2 + 200)
         this.watermelon.setOffset(0, 950)
 
-        this.can.setSize(this.can.width / 1.75, this.can.height / 2 - 200)
-        this.can.setOffset(350, 750)
+        // this.can.setSize(this.can.width / 1.75, this.can.height / 2 - 200)
+        // this.can.setOffset(350, 750)
 
 
 
@@ -200,22 +200,32 @@ class Play extends Phaser.Scene {
 
     // Bookmark v
 
-// create new barriers and add them to existing barrier group
     addBarrier() {
-        // let speedVariance =  Phaser.Math.Between(0, 50)
-        
-        // make array to pick random trash obstacle
+        var index = Phaser.Math.RND.between(0, 2);
 
-        var trashPicked = 'trash-bag'
+        var trashPicked = trashTypes[index]
 
-        let trash = new Trash(this, 'trash-bag', this.TRASH_SPEED)
-        if(trashPicked == 'trash-bag'){
-            console.log('bag')
+        console.log(trashPicked)
+        let trash = new Trash(this, trashPicked, this.TRASH_SPEED)
+
+        if(trashPicked == 'chips'){
+            console.log('cheeps')
+            trash.body.setScale(0.045)
+        }
+        else if(trashPicked == 'can') {
+            console.log('can')
+            trash.setScale(0.017)
+            trash.body.setSize(trash.width / 1.75, trash.height / 2 - 200)
+            trash.body.setOffset(350, 750)
+        }
+        else{
+            console.log('trash-bag')
+            // this.parentScene.add.existing(this).setSize(920, 600) //.setOffset(this.image.width / 15, this.image.height / 3 + 30)
             trash.body.setSize(920, 600)
             trash.body.setOffset(trash.width / 15, trash.height / 3 + 30)
-
+            trash.setScale(0.06)
+            trash.setOrigin(0)
         }
-        trash.setTint('0xFF00FF')
         this.trashGroup.add(trash)
         trash.x = game.config.width / 2
         trash.y = game.config.height / 2
@@ -225,11 +235,12 @@ class Play extends Phaser.Scene {
     update() {
         this.park.tilePositionX += (5 * SCROLL_SPEED)
 
+        this.trashGroup.getChildren().forEach( (trash => {trash.x -= this.TRASH_SPEED}))
         this.bananasss.getChildren().forEach( (banana => {banana.x -= SCROLL_SPEED}))
         this.grapes.x -= SCROLL_SPEED
         this.watermelon.x -= SCROLL_SPEED
 
-        this.can.x -= this.TRASH_SPEED
+        // this.can.x -= this.TRASH_SPEED
 
         if(this.p1duck.trashCount >= 3) {
             // change scene to game over
@@ -282,7 +293,7 @@ class Play extends Phaser.Scene {
         this.physics.add.collider(this.p1duck, this.can, this.handleTrashCollision, null, this, this.can)
 
         this.physics.add.collider(this.p1duck, this.bananasss, this.handleFruitCollision, null, this, this.bananasss)
-
+        this.physics.add.collider(this.p1duck, this.trashGroup, this.handleTrashCollision, null, this, this.trashGroup)
 
                 // Simulate scrolling
                 // subtract from y pos every update per

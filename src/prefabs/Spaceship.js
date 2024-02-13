@@ -9,7 +9,7 @@ class Trash extends Phaser.GameObjects.Sprite {
 
         super(scene, x, y, image)
         scene.add.existing(this)
-        this.image = 'trash'
+        this.image = image
 
         // this.moveSpeed = game.settings.spaceshipSpeed
         this.parentScene = scene               // maintain scene context
@@ -18,30 +18,14 @@ class Trash extends Phaser.GameObjects.Sprite {
         this.parentScene.add.existing(this)    // add to existing scene, displayList, updateList
         this.parentScene.physics.add.existing(this)    // add to physics system
 
-
         this.newTrash = true
         this.speed = speed
         // this.setVelocityX(speed)
 
-        if(this.image == 'chips'){
-            console.log('cheeps')
-            this.parentScene.add.existing(this).setScale(0.045)
-        }
-        else if(this.image == 'can') {
-            console.log('can')
-            this.parentScene.add.existing(this).setScale(0.017)
-        }
-        else{
-            console.log('trash')
-            // this.parentScene.add.existing(this).setSize(920, 600) //.setOffset(this.image.width / 15, this.image.height / 3 + 30)
-            this.parentScene.add.existing(this).setScale(0.07)
-            this.parentScene.add.existing(this).setOrigin(0)
-        }
-
     }
 
     update () {
-        this.X -= this.speed
+        // this.positionX -= this.speed
         if(this.Trash && this.x < game.config.width / 2) {
             // (recursively) call parent scene method from this context
             this.parentScene.addBarrier(this.parent, this.velocity, this.image)
