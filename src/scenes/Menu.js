@@ -6,6 +6,8 @@ class Menu extends Phaser.Scene {
     preload() {
         this.load.audio('collect', 'assets/zapsplat_multimedia_game_sound_collect_treasure_coin_001_40559.mp3')
         this.load.audio('ping', 'assets/zapsplat_multimedia_game_sound_childrens_collect_grab_single_norification_ping_soft_002_49762.mp3')
+        this.load.audio('click', 'assets/zapsplat_multimedia_game_sound_childrens_collect_grab_single_norification_ping_soft_001_49806.mp3')
+        this.load.audio('game-over', './assets/zapsplat_multimedia_game_sound_error_lose_thud_negative_001_74526.mp3')
 
         this.load.image('clouds', 'assets/clouds.png')
         this.load.image('park', 'assets/park.png')
@@ -117,14 +119,17 @@ class Menu extends Phaser.Scene {
 
         this.begin.on('pointerdown', () => {
             // play sfx
+            this.sound.play('click')
             this.scene.start('playScene') 
         })
         this.controls.on('pointerdown', () => {
             // play sfx
+            this.sound.play('click')
             this.scene.start('controlScene') 
         })
         this.credits.on('pointerdown', () => {
             // play sfx
+            this.sound.play('click')
             this.scene.start('creditsScene') 
         })
 

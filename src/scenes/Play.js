@@ -210,7 +210,7 @@ class Play extends Phaser.Scene {
 
         if(trashPicked == 'chips'){
             console.log('cheeps')
-            trash.body.setScale(0.045)
+            trash.setScale(0.045)
         }
         else if(trashPicked == 'can') {
             console.log('can')
@@ -220,7 +220,6 @@ class Play extends Phaser.Scene {
         }
         else{
             console.log('trash-bag')
-            // this.parentScene.add.existing(this).setSize(920, 600) //.setOffset(this.image.width / 15, this.image.height / 3 + 30)
             trash.body.setSize(920, 600)
             trash.body.setOffset(trash.width / 15, trash.height / 3 + 30)
             trash.setScale(0.06)
@@ -242,8 +241,11 @@ class Play extends Phaser.Scene {
 
         // this.can.x -= this.TRASH_SPEED
 
-        if(this.p1duck.trashCount >= 3) {
+        if(this.p1duck.trashCount >= 1) {
             // change scene to game over
+            console.log('over')
+            this.sound.play('game-over').once
+            this.scene.start('gameOverScene') 
             // display score
 
         }
@@ -332,6 +334,7 @@ class Play extends Phaser.Scene {
         // var strSC = `${this.p1Score}`
         this.scoreLeft.text = this.p1Score
         this.PLAYER_VELOCITY *= 1.05
+        // this.sound.pause()
     
     }
     
