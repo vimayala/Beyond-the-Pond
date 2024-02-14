@@ -228,15 +228,16 @@ class Play extends Phaser.Scene {
     }
 
     levelBump(){
-        if(this.p1Score % 10 == 0 && this.p1Score != this.last_score){
+        if(this.p1Score % 25 == 0 && this.p1Score != this.last_score){
             this.difficulty += 1
             if(this.TRASH_SPEED <= 4){
                 this.last_score = this.p1Score
-                this.SCROLL_SPEED *= 1.07
-                this.TRASH_SPEED *= 1.07
+                this.SCROLL_SPEED *= 1.2
+                this.TRASH_SPEED *= 1.2
+                this.PLAYER_VELOCITY *= 1.05
             }
             else if (this.TRASH_SPEED > 4 && this.mode == 'easy'){
-                console.log('middle')
+                // console.log('middle')
                 this.harderMode = this.time.addEvent({
                     delay: 10000,
                     callback: this.addBarrier,
@@ -245,8 +246,8 @@ class Play extends Phaser.Scene {
                 })
                 this.mode = 'middle'
             }
-            else if(this.mode == 'middle' && this.p1Score > 50){
-                console.log('end')
+            else if(this.mode == 'middle' && this.p1Score > 300){
+                // console.log('end')
                 this.PLAYER_VELOCITY = 100
                 this.mode = 'end'
             }
