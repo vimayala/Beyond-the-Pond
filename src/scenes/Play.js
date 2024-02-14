@@ -47,7 +47,7 @@ class Play extends Phaser.Scene {
         cursors = this.input.keyboard.createCursorKeys()
 
         // scoring
-        this.p1Score = 0
+        playerScore = 0
         let scoreConfig = {
             fontFamily: 'Verdana',
             fontSize: '24px', 
@@ -62,7 +62,7 @@ class Play extends Phaser.Scene {
         this.scoreWord = this.add.text(borderUISize + borderPadding - 40 , borderUISize + borderPadding * 2 - 50, 'Score: ', scoreConfig)
         scoreConfig.align = 'right'
         scoreConfig.fontSize = '30px'
-        this.scoreLeft = this.add.text(borderUISize + borderPadding - 40 , borderUISize + borderPadding * 2 - 20, `${this.p1Score}`, scoreConfig)
+        this.scoreLeft = this.add.text(borderUISize + borderPadding - 40 , borderUISize + borderPadding * 2 - 20, `${playerScore}`, scoreConfig)
         this.gameOver = false
         scoreConfig.fixedWidth = 0
         this.p1duck.trashCount = 0
@@ -89,6 +89,8 @@ class Play extends Phaser.Scene {
         this.physics.add.collider(this.p1duck, this.fruitGroup, this.handleFruitCollision, null, this, this.fruitGroup)
         this.physics.add.collider(this.p1duck, this.trashGroup, this.handleTrashCollision, null, this, this.trashGroup)
 
+        this.mySong = this.sound.add('beyond', {loop: true, volume: 0.8})
+        this.mySong.play()
 
     }
 
@@ -177,7 +179,7 @@ class Play extends Phaser.Scene {
         playerVector.normalize()
         this.p1duck.setVelocity(this.PLAYER_VELOCITY * playerVector.x, this.PLAYER_VELOCITY * playerVector.y)
 
-        // if(this.p1Score % 10 == 0 && this.p1Score != 0){
+        // if(playerScore % 10 == 0 && playerScore != 0){
         //     difficulty += 1
         // }
         // if(difficulty % 3 == 0 && difficulty != 0){
@@ -206,8 +208,8 @@ class Play extends Phaser.Scene {
     
         fruit.destroy()
         this.sound.play('collect')
-        this.p1Score += 5
-        this.scoreLeft.text = this.p1Score
+        playerScore += 5
+        this.scoreLeft.text = playerScore
         // this.PLAYER_VELOCITY *= 1.05
     
     }
@@ -228,15 +230,15 @@ class Play extends Phaser.Scene {
     }
 
     levelBump(){
-        if(this.p1Score % 25 == 0 && this.p1Score != this.last_score){
+        if(playerScore % 5 == 0 && playerScore != this.last_score){
             this.difficulty += 1
-            if(this.TRASH_SPEED <= 4){
-                this.last_score = this.p1Score
+            if(this.TRASH_SPEED <= 2){
+                this.last_score = playerScore
                 this.SCROLL_SPEED *= 1.2
                 this.TRASH_SPEED *= 1.2
                 this.PLAYER_VELOCITY *= 1.05
             }
-            else if (this.TRASH_SPEED > 4 && this.mode == 'easy'){
+            else if (this.TRASH_SPEED > 2 && this.mode == 'easy'){
                 // console.log('middle')
                 this.harderMode = this.time.addEvent({
                     delay: 10000,
@@ -245,11 +247,13 @@ class Play extends Phaser.Scene {
                     loop: true
                 })
                 this.mode = 'middle'
+                this.mySong.setRate(1.05)
             }
-            else if(this.mode == 'middle' && this.p1Score > 300){
+            else if(this.mode == 'middle' && playerScore > 300){
                 // console.log('end')
                 this.PLAYER_VELOCITY = 100
                 this.mode = 'end'
+                this.mySong.setRate(1.1)
             }
         }
     }

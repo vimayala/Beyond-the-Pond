@@ -8,6 +8,7 @@ class Menu extends Phaser.Scene {
         this.load.audio('ping', 'assets/zapsplat_multimedia_game_sound_childrens_collect_grab_single_norification_ping_soft_002_49762.mp3')
         this.load.audio('click', 'assets/zapsplat_multimedia_game_sound_childrens_collect_grab_single_norification_ping_soft_001_49806.mp3')
         this.load.audio('game-over', './assets/zapsplat_multimedia_game_sound_error_lose_thud_negative_001_74526.mp3')
+        this.load.audio('beyond', './assets/FarBeyond.m4a')
 
         this.load.image('clouds', 'assets/clouds.png')              // images
         this.load.image('park', 'assets/park.png')

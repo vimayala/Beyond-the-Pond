@@ -35,6 +35,8 @@ const fruitTypes = ['banana', 'grapes', 'watermelon']
 let borderUISize = game.config.height / 15
 let borderPadding = borderUISize / 3
 
+var playerScore = 0
+
 // var difficulty = 0
 // var last_score = 0
 
