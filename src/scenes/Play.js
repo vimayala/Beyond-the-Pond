@@ -25,6 +25,7 @@ class Play extends Phaser.Scene {
         this.park = this.add.tileSprite(0, 0, 1440, 960, 'park').setOrigin(0,0).setScale(0.5)
         
         this.p1duck = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 200, 'duck-walk').setOrigin(0.5, 0).setScale(1.4)
+       
         this.p1duck.setCircle(this.p1duck.width / 2.8).setOffset(this.p1duck.width / 6, this.p1duck.width / 20)
 
         this.fruitGroup = this.physics.add.group({
