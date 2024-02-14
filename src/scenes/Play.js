@@ -159,6 +159,7 @@ class Play extends Phaser.Scene {
             console.log('over')
             this.scene.start('gameOverScene') 
             // display score
+            this.mySong.stop()
 
         }
         
@@ -247,13 +248,13 @@ class Play extends Phaser.Scene {
                     loop: true
                 })
                 this.mode = 'middle'
-                this.mySong.setRate(1.05)
+                this.mySong.setRate(1.02)
             }
             else if(this.mode == 'middle' && playerScore > 300){
                 // console.log('end')
                 this.PLAYER_VELOCITY = 100
                 this.mode = 'end'
-                this.mySong.setRate(1.1)
+                this.mySong.setRate(1.05)
             }
         }
     }
