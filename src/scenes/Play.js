@@ -202,11 +202,13 @@ class Play extends Phaser.Scene {
 
     addBarrier() {
         var index = Phaser.Math.RND.between(0, 2);
-
         var trashPicked = trashTypes[index]
 
-        console.log(trashPicked)
+        // console.log(trashPicked)
         let trash = new Trash(this, trashPicked, this.TRASH_SPEED)
+
+        // trash.x = randomX
+        // trash.y = randomY
 
         if(trashPicked == 'chips'){
             console.log('cheeps')
@@ -226,8 +228,8 @@ class Play extends Phaser.Scene {
             trash.setOrigin(0)
         }
         this.trashGroup.add(trash)
-        trash.x = game.config.width / 2
-        trash.y = game.config.height / 2
+        // trash.x = game.config.width / 2
+        // trash.y = game.config.height / 2
     }
 
 
@@ -241,10 +243,9 @@ class Play extends Phaser.Scene {
 
         // this.can.x -= this.TRASH_SPEED
 
-        if(this.p1duck.trashCount >= 1) {
+        if(this.p1duck.trashCount >=3) {
             // change scene to game over
             console.log('over')
-            this.sound.play('game-over').once
             this.scene.start('gameOverScene') 
             // display score
 
@@ -268,21 +269,9 @@ class Play extends Phaser.Scene {
         this.p1duck.setVelocity(this.PLAYER_VELOCITY * playerVector.x, this.PLAYER_VELOCITY * playerVector.y)
         
 
-
-        // if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyRESET)) {
-        //     this.scene.restart()
-        // }
-
-
-        // if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
-        //     this.scene.start("menuScene")
-        // }
         // // this.park.tilePositionX -= 3.5
         // if(!this.gameOver) {
         //     this.p1duck.update()
-        //     // this.ship01.update()
-        //     // this.ship02.update()
-        //     // this.ship03.update()
         // }
 
 
@@ -321,28 +310,16 @@ class Play extends Phaser.Scene {
 
 
     handleFruitCollision(duck, fruit){
-
-        // update collision box
-    
-        // make duck quack or coin collect
-    
-        //maybe make banana have flash animation or something
     
         fruit.destroy()
         this.sound.play('collect')
         this.p1Score += 5
-        // var strSC = `${this.p1Score}`
         this.scoreLeft.text = this.p1Score
         this.PLAYER_VELOCITY *= 1.05
-        // this.sound.pause()
     
     }
     
     handleTrashCollision(duck, trash){
-    
-        // make duck blink white
-    
-        // maybe eyes change
         
         duck.setTint(0xf05a4f)
         this.time.addEvent({ delay: 175, callback: () => {
@@ -351,30 +328,13 @@ class Play extends Phaser.Scene {
             this.time.addEvent({ delay: 125, callback: () => {this.p1duck.clearTint()}, callbackScope: this})
 
         }, callbackScope: this})
-
-        // this.scene.time.delayedCall(2500, duck.clearTint())
-        // this.scene.time.delayedCall(1500, duck.setTint(0xf05a4f))
-        // this.scene.time.delayedCall(2000, duck.clearTint())
         trash.destroy()
         this.sound.play('ping')
-        // this.p1Score()           // change score ?
-        // run into 3, end game ?
         this.p1duck.trashCount += 1
         this.PLAYER_VELOCITY = 100
+        console.log(trash)
         
     }
-
-
-
-    // handleFruitGroupCollision(duck, fruitGroup){
-
-    //     fruitGroup.destroy()
-    //     this.sound.play('collect')
-    //     this.p1Score += 5
-    //     this.scoreLeft.text = this.p1Score
-    //     this.PLAYER_VELOCITY *= 1.05
-
-    // }
 
 }
 

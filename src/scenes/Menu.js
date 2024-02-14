@@ -94,9 +94,9 @@ class Menu extends Phaser.Scene {
 
         var height = game.config.height/2 - borderUISize - borderPadding
 
-        this.begin = this.add.image(game.config.width/2, height + 65,'frog-button').setScale(0.1)
-        this.controls = this.add.image(game.config.width/2, height + 126,'button').setScale(0.1)
-        this.credits = this.add.image(game.config.width/2, height + 175,'button').setScale(0.1)
+        this.begin = this.add.image(game.config.width/2, height + 65, 'frog-button').setScale(0.1)
+        this.controls = this.add.image(game.config.width/2, height + 126, 'button').setScale(0.1)
+        this.credits = this.add.image(game.config.width/2, height + 175, 'button').setScale(0.1)
 
         this.begin.setInteractive({
             useHandCursor: true
