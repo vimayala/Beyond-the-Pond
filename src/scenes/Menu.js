@@ -34,6 +34,13 @@ class Menu extends Phaser.Scene {
             startFrame: 0,
             endFrame: 3
         })
+        this.load.spritesheet('lives', './assets/lives.png', {
+            frameWidth: 960,
+            frameHeight: 320,
+            startFrame: 0,
+            endFrame: 2
+        })
+
         this.load.spritesheet('duck-walk', './assets/duck-walks-blinks.png', {
             frameWidth: 64,
             frameHeight: 64,

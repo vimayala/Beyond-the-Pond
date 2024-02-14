@@ -68,6 +68,7 @@ class Play extends Phaser.Scene {
         scoreConfig.fixedWidth = 0
         this.p1duck.trashCount = 0
     
+        this.lives = this.add.sprite(155, borderUISize + borderPadding - 20, 'lives').setScale(0.1)
 
         this.addFruit()
 
@@ -154,12 +155,6 @@ class Play extends Phaser.Scene {
 
     update() {
         this.park.tilePositionX += (2)       // Stay at initial scroll speed
-
-        if(this.p1duck.trashCount >=3) {
-            this.scene.start('gameOverScene') 
-            this.mySong.stop()
-
-        }
         
         let playerVector = new Phaser.Math.Vector2(0, 0)
         let playerDirection = 'down'
@@ -201,6 +196,16 @@ class Play extends Phaser.Scene {
         trash.destroy()
         this.sound.play('ping')
         this.p1duck.trashCount += 1
+
+        if(this.p1duck.trashCount >=3) {
+            this.scene.start('gameOverScene') 
+            this.mySong.stop()
+        }
+        else{
+            this.lives.setFrame(this.p1duck.trashCount)
+            console.log(this.p1duck.trashCount)
+        }
+
         this.PLAYER_VELOCITY = 100
     }
 
