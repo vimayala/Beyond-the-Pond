@@ -9,6 +9,8 @@ class Menu extends Phaser.Scene {
         this.load.audio('click', 'assets/zapsplat_multimedia_game_sound_childrens_collect_grab_single_norification_ping_soft_001_49806.mp3')
         this.load.audio('game-over', './assets/zapsplat_multimedia_game_sound_error_lose_thud_negative_001_74526.mp3')
         this.load.audio('beyond', './assets/FarBeyondThe.m4a')
+        this.load.audio('waiting', './assets/Waiting.m4a')
+
 
         this.load.image('clouds', 'assets/clouds.png')              // images
         this.load.image('park', 'assets/park.png')
@@ -116,18 +118,25 @@ class Menu extends Phaser.Scene {
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT)
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT)
 
+        
+        this.mySong = this.sound.add('waiting', {loop: true, volume: 0.8})
+        this.mySong.play()
+
         this.begin.on('pointerdown', () => {
             // play sfx
+            this.mySong.stop()
             this.sound.play('click')
             this.scene.start('playScene') 
         })
         this.controls.on('pointerdown', () => {
             // play sfx
+            this.mySong.stop()
             this.sound.play('click')
             this.scene.start('controlScene') 
         })
         this.credits.on('pointerdown', () => {
             // play sfx
+            this.mySong.stop()
             this.sound.play('click')
             this.scene.start('creditsScene') 
         })

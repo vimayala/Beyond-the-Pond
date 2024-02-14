@@ -155,10 +155,7 @@ class Play extends Phaser.Scene {
         this.park.tilePositionX += (5 * 1.75)       // Stay at initial scroll speed
 
         if(this.p1duck.trashCount >=3) {
-            // change scene to game over
-            console.log('over')
             this.scene.start('gameOverScene') 
-            // display score
             this.mySong.stop()
 
         }
@@ -180,29 +177,6 @@ class Play extends Phaser.Scene {
         playerVector.normalize()
         this.p1duck.setVelocity(this.PLAYER_VELOCITY * playerVector.x, this.PLAYER_VELOCITY * playerVector.y)
 
-        // if(playerScore % 10 == 0 && playerScore != 0){
-        //     difficulty += 1
-        // }
-        // if(difficulty % 3 == 0 && difficulty != 0){
-        //     difficulty += 1
-        //     this.this.SCROLL_SPEED *= 1.07
-        //     this.TRASH_SPEED *= 1.07
-        //     this.PLAYER_VELOCITY *= 1.05
-        //     console.log('increase velocity')
-
-        // }
-
-
-        
-        // looped delayed call
-
-        // this.time.delayedCall(20000, () => { 
-        //     console.log('speed up!')
-        //     this.this.SCROLL_SPEED *= 1.07
-        //     this.TRASH_SPEED *= 1.07
-        // })
-
-
     }
 
     handleFruitCollision(duck, fruit){
@@ -216,7 +190,6 @@ class Play extends Phaser.Scene {
     }
     
     handleTrashCollision(duck, trash){
-        
         duck.setTint(0xf05a4f)
         this.time.addEvent({ delay: 175, callback: () => {
             this.p1duck.clearTint()
@@ -231,15 +204,15 @@ class Play extends Phaser.Scene {
     }
 
     levelBump(){
-        if(playerScore % 5 == 0 && playerScore != this.last_score){
+        if(playerScore % 75 == 0 && playerScore != this.last_score){
             this.difficulty += 1
-            if(this.TRASH_SPEED <= 2){
+            if(this.TRASH_SPEED <= 4){
                 this.last_score = playerScore
                 this.SCROLL_SPEED *= 1.2
                 this.TRASH_SPEED *= 1.2
                 this.PLAYER_VELOCITY *= 1.05
             }
-            else if (this.TRASH_SPEED > 2 && this.mode == 'easy'){
+            else if (this.TRASH_SPEED > 4 && this.mode == 'easy'){
                 // console.log('middle')
                 this.harderMode = this.time.addEvent({
                     delay: 10000,

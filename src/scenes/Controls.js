@@ -70,18 +70,20 @@ class Controls extends Phaser.Scene {
         this.add.text(game.config.width/5 - 15, height + 110, 'Obstacles:', controlsConfig).setOrigin(0.5)
 
 
-
-
-
+        this.mySong = this.sound.add('waiting', {loop: true, volume: 0.8})
+        this.mySong.play()
 
         // this.credits = this.add.image(game.config.width/2, game.config.height/2 - borderUISize - borderPadding + 175,'button').setScale(0.1)
 
         this.begin.on('pointerdown', () => {
             // play sfx
+            this.mySong.stop()
+            this.sound.play('click')
             this.scene.start('playScene') 
         })
         this.menu.on('pointerdown', () => {
-            // play sfx
+            this.mySong.stop()
+            this.sound.play('click')
             this.scene.start('menuScene') 
         })
 
