@@ -125,6 +125,7 @@ class Play extends Phaser.Scene {
             trash.body.setOffset(trash.width / 15, trash.height / 3 + 30)
             trash.setScale(0.06)
             trash.setOrigin(0)
+            trash.play('trash-stinky')
         }
         this.trashGroup.add(trash)
     }
@@ -159,7 +160,7 @@ class Play extends Phaser.Scene {
 
 
     update() {
-        this.park.tilePositionX += (5 * SCROLL_SPEED)
+        this.park.tilePositionX += (5 * 1.75)       // Stay at initial scroll speed
 
         if(this.p1duck.trashCount >=3) {
             // change scene to game over
@@ -186,17 +187,26 @@ class Play extends Phaser.Scene {
         playerVector.normalize()
         this.p1duck.setVelocity(this.PLAYER_VELOCITY * playerVector.x, this.PLAYER_VELOCITY * playerVector.y)
 
-
-
-        // major bookmark
-
-        // if player points = 100, increase game speed 1.5 ?
-        // if(this.p1Score % 100 == 0){
-        //     this.SCROLL_SPEED *= 1.2
-        //     this.PLAYER_VELOCITY *= 1.2
-        //     console.log('scroll speed, player velocity')
+        // if(this.p1Score % 10 == 0 && this.p1Score != 0){
+        //     difficulty += 1
+        // }
+        // if(difficulty % 3 == 0 && difficulty != 0){
+        //     difficulty += 1
+        //     SCROLL_SPEED *= 1.07
+        //     this.TRASH_SPEED *= 1.07
+        //     this.PLAYER_VELOCITY *= 1.05
+        //     console.log('increase velocity')
 
         // }
+
+
+        // looped delayed call
+
+        this.time.delayedCall(20000, () => { 
+            console.log('speed up!')
+            SCROLL_SPEED *= 1.07
+            this.TRASH_SPEED *= 1.07
+        })
 
 
     }

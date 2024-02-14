@@ -35,4 +35,6 @@ let SCROLL_SPEED = 1.75
 let borderUISize = game.config.height / 15
 let borderPadding = borderUISize / 3
 
+var difficulty = 0
+
 let { height, width } = game.config

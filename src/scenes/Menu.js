@@ -9,7 +9,7 @@ class Menu extends Phaser.Scene {
         this.load.audio('click', 'assets/zapsplat_multimedia_game_sound_childrens_collect_grab_single_norification_ping_soft_001_49806.mp3')
         this.load.audio('game-over', './assets/zapsplat_multimedia_game_sound_error_lose_thud_negative_001_74526.mp3')
 
-        this.load.image('clouds', 'assets/clouds.png')
+        this.load.image('clouds', 'assets/clouds.png')              // images
         this.load.image('park', 'assets/park.png')
         this.load.image('blue', 'assets/park-temp.png')
         this.load.image('tree', 'assets/tree.png')
@@ -19,11 +19,9 @@ class Menu extends Phaser.Scene {
         this.load.image('can', 'assets/can.png')
         this.load.image('chips', 'assets/chips.png')
         this.load.image('trash-bag', 'assets/trash.png')
-
-        this.load.image('button', 'assets/button.PNG')
-        this.load.image('frog-button', 'assets/frog-button.PNG')
-
-        this.load.image('up', 'assets/up.png')
+        this.load.image('button', 'assets/button.PNG')              // buttons
+        this.load.image('frog-button', 'assets/frog-button.PNG')    
+        this.load.image('up', 'assets/up.png')                  
         this.load.image('down', 'assets/down.png')
 
 
