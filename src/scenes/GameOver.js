@@ -2,6 +2,52 @@ class GameOver extends Phaser.Scene {
         constructor() {
             super('gameOverScene')
         }
+
+        preload() {
+            this.load.audio('collect', 'assets/zapsplat_multimedia_game_sound_collect_treasure_coin_001_40559.mp3')
+            this.load.audio('ping', 'assets/zapsplat_multimedia_game_sound_childrens_collect_grab_single_norification_ping_soft_002_49762.mp3')
+            this.load.audio('click', 'assets/zapsplat_multimedia_game_sound_childrens_collect_grab_single_norification_ping_soft_001_49806.mp3')
+            this.load.audio('game-over', './assets/zapsplat_multimedia_game_sound_error_lose_thud_negative_001_74526.mp3')
+            this.load.audio('beyond', './assets/FarBeyondThe.m4a')
+            this.load.audio('waiting', './assets/Waiting.m4a')
+    
+    
+            this.load.image('clouds', 'assets/clouds.png')              // images
+            this.load.image('park', 'assets/park.png')
+            this.load.image('blue', 'assets/park-temp.png')
+            this.load.image('tree', 'assets/tree.png')
+            this.load.image('banana', 'assets/banana.png')
+            this.load.image('watermelon', 'assets/watermelon.png')
+            this.load.image('grapes', 'assets/grapes.png')
+            this.load.image('can', 'assets/can.png')
+            this.load.image('chips', 'assets/chips.png')
+            this.load.image('trash-bag', 'assets/trash.png')
+            this.load.image('button', 'assets/button.PNG')              // buttons
+            this.load.image('frog-button', 'assets/frog-button.PNG')    
+            this.load.image('up', 'assets/up.png')                  
+            this.load.image('down', 'assets/down.png')
+    
+    
+            this.load.spritesheet('trash-stinks', './assets/trash-stinks.png', {
+                frameWidth: 1280,
+                frameHeight: 980,
+                startFrame: 0,
+                endFrame: 3
+            })
+            this.load.spritesheet('duck-walk', './assets/duck-walks-blinks.png', {
+                frameWidth: 64,
+                frameHeight: 64,
+                startFrame: 0,
+                endFrame: 11
+            })
+            this.load.spritesheet('duck-idle', './assets/duck-idle-blinks.png', {
+                frameWidth: 64,
+                frameHeight: 64,
+                startFrame: 0,
+                endFrame: 8
+            })
+    
+        }
     
         create() {
     
@@ -10,7 +56,7 @@ class GameOver extends Phaser.Scene {
 
             let controlsConfig = {
                 fontFamily: 'American Typewriter',
-                fontSize: '36px', 
+                fontSize: '64px', 
                 color: '#FFFFFF',
                 align: 'right', padding: {
                     top: 5,
@@ -24,13 +70,20 @@ class GameOver extends Phaser.Scene {
             
             var height = game.config.height/2 - borderUISize - borderPadding
     
-            this.add.image(2.85 * game.config.width/4, height + 150, 'can').setScale(0.035)
-            this.add.image(3.25 * game.config.width/4, height + 155, 'chips').setScale(0.05)
-            this.add.image(3.65 * game.config.width/4, height + 150, 'trash-stinks').setScale(0.05)
+            // this.add.image(2.85 * game.config.width/4, height + 150, 'can').setScale(0.035)
+            // this.add.image(3.25 * game.config.width/4, height + 155, 'chips').setScale(0.05)
+            // this.add.image(3.65 * game.config.width/4, height + 150, 'trash-stinks').setScale(0.05)
     
             // this.test.setTint('0xFFFFFF')
-            this.add.text(game.config.width/2, borderUISize + borderPadding + 25, 'Game Over!', controlsConfig).setOrigin(0.5)
-            this.add.text(game.config.width/2, borderUISize + borderPadding + 0, `Your score was ${playerScore}`, controlsConfig).setOrigin(0.5)
+            this.add.text(game.config.width/2, borderUISize + borderPadding / 0.2, 'Game Over!', controlsConfig).setOrigin(0.5)
+            controlsConfig.fontSize = '48px'
+            this.add.text(game.config.width/2, (borderUISize + borderPadding) / 0.25, `Your score was`, controlsConfig).setOrigin(0.5)
+
+
+            
+            controlsConfig.fontSize = '72px'
+            this.add.text(game.config.width/2, (borderUISize + borderPadding) / 0.15, `${playerScore}`, controlsConfig).setOrigin(0.5)
+
 
             playerScore = 0
 

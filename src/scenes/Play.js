@@ -132,18 +132,18 @@ class Play extends Phaser.Scene {
             fruit.body.setCircle(fruit.width / 5)
             fruit.body.setSize(fruit.width / 2, fruit.height / 2)
             fruit.body.setOffset(fruit.width / 5, fruit.height / 4)
-            fruit.setScale(0.09)
+            fruit.setScale(0.08)
 
         }
         else if(fruitPicked == 'grapes') {
-            fruit.setScale(0.02)
+            fruit.setScale(0.07)
             fruit.body.setSize(fruit.width / 2, fruit.height / 1.5 )
-            fruit.body.setOffset(500, 600) 
+            fruit.body.setOffset(fruit.width / 5, fruit.height / 4)
         }
         else{
-            fruit.setScale(0.017)
-            fruit.body.setSize(fruit.width - 350, fruit.height / 2 + 200)
-            fruit.body.setOffset(250, 900)
+            fruit.setScale(0.07)
+            fruit.body.setSize(fruit.width /1.25, fruit.height / 2)
+            fruit.body.setOffset(fruit.width / 7, fruit.height / 2.5)
 
         }
         fruit.body.setImmovable()
