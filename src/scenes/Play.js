@@ -8,6 +8,11 @@ class Play extends Phaser.Scene {
 
         // fruit/scrolling speed consistent ??
         this.TRASH_SPEED = 2
+        this.SCROLL_SPEED = 1.75
+
+        this.difficulty = 0
+        this.last_score = 0
+        this.mode = 'easy'
 
         // this.xArray = [0, 50, 100, 250, 300, 350, 400]
 
@@ -127,6 +132,7 @@ class Play extends Phaser.Scene {
             trash.setOrigin(0)
             trash.play('trash-stinky')
         }
+        trash.body.setImmovable()
         this.trashGroup.add(trash)
     }
 
@@ -134,7 +140,7 @@ class Play extends Phaser.Scene {
         var index = Phaser.Math.RND.between(0, 2);
         var fruitPicked = fruitTypes[index]
 
-        let fruit = new Fruit(this, fruitPicked, SCROLL_SPEED)
+        let fruit = new Fruit(this, fruitPicked, this.SCROLL_SPEED)
 
         if(fruitPicked == 'banana'){
             console.log('banana')
@@ -155,6 +161,7 @@ class Play extends Phaser.Scene {
             fruit.body.setOffset(250, 900)
 
         }
+        fruit.body.setImmovable()
         this.fruitGroup.add(fruit)
     }
 
@@ -172,13 +179,13 @@ class Play extends Phaser.Scene {
         
         let playerVector = new Phaser.Math.Vector2(0, 0)
         let playerDirection = 'down'
-        if(this.p1duck.y >= 125){
+        if(this.p1duck.y >= 135){
             if(cursors.up.isDown){
                 playerVector.y = -1
                 playerDirection = 'up'
             }
         }
-        if(this.p1duck.y <= 367){
+        if(this.p1duck.y <= 400){
             if(cursors.down.isDown){
                 playerVector.y = 1
                 playerDirection = 'down'
@@ -192,7 +199,7 @@ class Play extends Phaser.Scene {
         // }
         // if(difficulty % 3 == 0 && difficulty != 0){
         //     difficulty += 1
-        //     SCROLL_SPEED *= 1.07
+        //     this.this.SCROLL_SPEED *= 1.07
         //     this.TRASH_SPEED *= 1.07
         //     this.PLAYER_VELOCITY *= 1.05
         //     console.log('increase velocity')
@@ -200,13 +207,14 @@ class Play extends Phaser.Scene {
         // }
 
 
+        
         // looped delayed call
 
-        this.time.delayedCall(20000, () => { 
-            console.log('speed up!')
-            SCROLL_SPEED *= 1.07
-            this.TRASH_SPEED *= 1.07
-        })
+        // this.time.delayedCall(20000, () => { 
+        //     console.log('speed up!')
+        //     this.this.SCROLL_SPEED *= 1.07
+        //     this.TRASH_SPEED *= 1.07
+        // })
 
 
     }
@@ -234,6 +242,35 @@ class Play extends Phaser.Scene {
         this.sound.play('ping')
         this.p1duck.trashCount += 1
         this.PLAYER_VELOCITY = 100
+    }
+
+    levelBump(){
+        if(this.p1Score % 5 == 0 && this.p1Score != this.last_score){
+            this.difficulty += 1
+            if(this.TRASH_SPEED <= 2){
+                this.last_score = this.p1Score
+                this.SCROLL_SPEED *= 1.07
+                this.TRASH_SPEED *= 1.07
+            }
+            else if (this.TRASH_SPEED > 5 && this.mode == 'easy'){
+                this.harderMode = this.time.addEvent({
+                    delay: 5000,
+                    callback: this.addBarrier,
+                    callbackScope: this,
+                    loop: true
+                })
+                this.mode = 'middle'
+            }
+            else if(this.mode == 'middle' && this.p1Score > 500){
+                this.hardestMode = this.time.addEvent({
+                    delay: 3000,
+                    callback: this.addBarrier,
+                    callbackScope: this,
+                    loop: true
+                })
+                this.mode = 'end'
+            }
+        }
     }
 
 }
