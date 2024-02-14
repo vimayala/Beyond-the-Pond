@@ -24,7 +24,7 @@ class Controls extends Phaser.Scene {
         this.add.image(game.config.width/3, height - 62, 'up').setScale(0.05)
         this.add.image(game.config.width/3, height - 26, 'down').setScale(0.05)
 
-        this.add.image(2.5 * game.config.width/4, height + 40, 'banana').setScale(0.043)
+        this.add.image(2.5 * game.config.width/4, height + 40, 'banana').setScale(0.2)
         this.add.image(2.95 * game.config.width/4, height + 40, 'grapes').setScale(0.043)
         this.add.image(3.5 * game.config.width/4, height + 40, 'watermelon').setScale(0.043)
 

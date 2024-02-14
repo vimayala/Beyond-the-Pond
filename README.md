@@ -9,7 +9,7 @@
 - [X] Implement proper collision detection (via Arcade Physics or a custom routine) (1)
 - [ ] Have looping background music* (1)
 - [X] Use a minimum of four sound effects for key mechanics, UI, and/or significant events appropriate to your game design (1)
-- [ ] Use randomness to generate escalating challenge, e.g. terrain, pickups, etc. (1)
+- [X] Use randomness to generate escalating challenge, e.g. terrain, pickups, etc. (1)
 - [X] Include some metric of accomplishment that a player can improve over time, e.g., score, survival time, etc. (1)
 - [X] Be theoretically endless (1)
 - [X] Be playable for at least 15 seconds for a new player of low to moderate skill (1)

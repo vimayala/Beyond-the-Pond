@@ -22,7 +22,7 @@ class Play extends Phaser.Scene {
         this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0,0)  
 
         // images
-        this.park = this.add.tileSprite(0, 0, 14400, 9600, 'park').setOrigin(0,0).setScale(0.05)
+        this.park = this.add.tileSprite(0, 0, 1440, 960, 'park').setOrigin(0,0).setScale(0.5)
         
         this.p1duck = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 200, 'duck-walk').setOrigin(0.5, 0).setScale(1.4)
         this.p1duck.setCircle(this.p1duck.width / 2.8).setOffset(this.p1duck.width / 6, this.p1duck.width / 20)
@@ -132,7 +132,7 @@ class Play extends Phaser.Scene {
             fruit.body.setCircle(fruit.width / 5)
             fruit.body.setSize(fruit.width / 2, fruit.height / 2)
             fruit.body.setOffset(fruit.width / 5, fruit.height / 4)
-            fruit.setScale(0.02)
+            fruit.setScale(0.09)
 
         }
         else if(fruitPicked == 'grapes') {
@@ -152,7 +152,7 @@ class Play extends Phaser.Scene {
 
 
     update() {
-        this.park.tilePositionX += (5 * 1.75)       // Stay at initial scroll speed
+        this.park.tilePositionX += (2)       // Stay at initial scroll speed
 
         if(this.p1duck.trashCount >=3) {
             this.scene.start('gameOverScene') 
@@ -204,13 +204,13 @@ class Play extends Phaser.Scene {
     }
 
     levelBump(){
-        if(playerScore % 75 == 0 && playerScore != this.last_score){
+        if(playerScore % 50 == 0 && playerScore != this.last_score){
             this.difficulty += 1
             if(this.TRASH_SPEED <= 4){
                 this.last_score = playerScore
                 this.SCROLL_SPEED *= 1.2
                 this.TRASH_SPEED *= 1.2
-                this.PLAYER_VELOCITY *= 1.05
+                // this.PLAYER_VELOCITY *= 1.05
             }
             else if (this.TRASH_SPEED > 4 && this.mode == 'easy'){
                 // console.log('middle')
@@ -221,6 +221,7 @@ class Play extends Phaser.Scene {
                     loop: true
                 })
                 this.mode = 'middle'
+                this.PLAYER_VELOCITY *= 1.05
                 this.mySong.setRate(1.02)
             }
             else if(this.mode == 'middle' && playerScore > 300){
