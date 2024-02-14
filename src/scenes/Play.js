@@ -5,32 +5,16 @@ class Play extends Phaser.Scene {
 
     init() {
         this.PLAYER_VELOCITY = 75
-
-        // fruit/scrolling speed consistent ??
         this.TRASH_SPEED = 2
         this.SCROLL_SPEED = 1.75
-
         this.difficulty = 0
         this.last_score = 0
         this.mode = 'easy'
-
-        // this.xArray = [0, 50, 100, 250, 300, 350, 400]
-
-
         this.obstacleSpawnDelay = 2500
-
-        // this.SC = "Score: "
-
-        // this.BANANA_COUNT = 0
-
-        // add water/hydration + depletion
-
     }
 
     create() {
 
-
-        
         // borders
         this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0,0)                                     
         this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0,0)     
@@ -54,7 +38,6 @@ class Play extends Phaser.Scene {
 
         // start animation
         this.p1duck.play('walking')
-        // this.trash.play('trash-stinky')
 
         // keys defined
         keyFIRE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F)
@@ -225,7 +208,7 @@ class Play extends Phaser.Scene {
         this.sound.play('collect')
         this.p1Score += 5
         this.scoreLeft.text = this.p1Score
-        this.PLAYER_VELOCITY *= 1.05
+        // this.PLAYER_VELOCITY *= 1.05
     
     }
     
@@ -245,43 +228,33 @@ class Play extends Phaser.Scene {
     }
 
     levelBump(){
-        if(this.p1Score % 5 == 0 && this.p1Score != this.last_score){
+        if(this.p1Score % 10 == 0 && this.p1Score != this.last_score){
             this.difficulty += 1
-            if(this.TRASH_SPEED <= 2){
+            if(this.TRASH_SPEED <= 4){
                 this.last_score = this.p1Score
                 this.SCROLL_SPEED *= 1.07
                 this.TRASH_SPEED *= 1.07
             }
-            else if (this.TRASH_SPEED > 5 && this.mode == 'easy'){
+            else if (this.TRASH_SPEED > 4 && this.mode == 'easy'){
+                console.log('middle')
                 this.harderMode = this.time.addEvent({
-                    delay: 5000,
+                    delay: 10000,
                     callback: this.addBarrier,
                     callbackScope: this,
                     loop: true
                 })
                 this.mode = 'middle'
             }
-            else if(this.mode == 'middle' && this.p1Score > 500){
-                this.hardestMode = this.time.addEvent({
-                    delay: 3000,
-                    callback: this.addBarrier,
-                    callbackScope: this,
-                    loop: true
-                })
+            else if(this.mode == 'middle' && this.p1Score > 50){
+                console.log('end')
+                this.PLAYER_VELOCITY = 100
                 this.mode = 'end'
             }
         }
     }
-
 }
-
 
 
 
 // increase player velocity for points attained
 // reset player velocity when colliding with obstacle
-
-
-
-// .setTint()
-    // type: Phaser WEBGL needed to tint
