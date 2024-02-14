@@ -28,6 +28,7 @@ let game = new Phaser.Game(config)
 let keyFIRE, keyRESET, keyLEFT, keyRIGHT, cursors
 
 const trashTypes = ['chips', 'can', 'trash-bag']
+const fruitTypes = ['banana', 'grapes', 'watermelon']
 
 let SCROLL_SPEED = 1.75
 

@@ -8,7 +8,7 @@
 - [X] Simulate scrolling with a tileSprite (or equivalent means) (1)
 - [ ] Implement proper collision detection (via Arcade Physics or a custom routine) (1)
 - [ ] Have looping background music* (1)
-- [ ] Use a minimum of four sound effects for key mechanics, UI, and/or significant events appropriate to your game design (1)
+- [X] Use a minimum of four sound effects for key mechanics, UI, and/or significant events appropriate to your game design (1)
 - [ ] Use randomness to generate escalating challenge, e.g. terrain, pickups, etc. (1)
 - [X] Include some metric of accomplishment that a player can improve over time, e.g., score, survival time, etc. (1)
 - [ ] Be theoretically endless (1)

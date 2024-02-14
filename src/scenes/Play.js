@@ -4,12 +4,14 @@ class Play extends Phaser.Scene {
     }
 
     init() {
-        this.PLAYER_VELOCITY = 100
+        this.PLAYER_VELOCITY = 75
 
         // fruit/scrolling speed consistent ??
         this.TRASH_SPEED = 2
 
-        this.xArray = [0, 50, 100, 250, 300, 350, 400]
+        // this.xArray = [0, 50, 100, 250, 300, 350, 400]
+
+
         this.obstacleSpawnDelay = 2500
 
         // this.SC = "Score: "
@@ -20,50 +22,10 @@ class Play extends Phaser.Scene {
 
     }
 
-    // preload() {
-    //     this.load.audio('collect', 'assets/zapsplat_multimedia_game_sound_collect_treasure_coin_001_40559.mp3')
-    //     this.load.audio('ping', 'assets/zapsplat_multimedia_game_sound_childrens_collect_grab_single_norification_ping_soft_002_49762.mp3')
-
-    //     this.load.image('clouds', 'assets/clouds.png')
-    //     this.load.image('park', 'assets/park.png')
-    //     this.load.image('blue', 'assets/park-temp.png')
-    //     this.load.image('tree', 'assets/tree.png')
-    //     this.load.image('banana', 'assets/banana.png')
-    //     this.load.image('watermelon', 'assets/watermelon.png')
-    //     this.load.image('grapes', 'assets/grapes.png')
-    //     this.load.image('can', 'assets/can.png')
-    //     this.load.image('chips', 'assets/chips.png')
-
-    //     this.load.image('button', 'assets/button.PNG')
-    //     this.load.image('frog-button', 'assets/frog-button.PNG')
-
-    //     this.load.image('up', 'assets/up.png')
-    //     this.load.image('down', 'assets/down.png')
-
-
-    //     this.load.spritesheet('trash-stinks', './assets/trash-stinks.png', {
-    //         frameWidth: 1280,
-    //         frameHeight: 980,
-    //         startFrame: 0,
-    //         endFrame: 3
-    //     })
-    //     this.load.spritesheet('duck-walk', './assets/duck-walks-blinks.png', {
-    //         frameWidth: 64,
-    //         frameHeight: 64,
-    //         startFrame: 0,
-    //         endFrame: 11
-    //     })
-    //     this.load.spritesheet('duck-idle', './assets/duck-idle-blinks.png', {
-    //         frameWidth: 64,
-    //         frameHeight: 64,
-    //         startFrame: 0,
-    //         endFrame: 8
-    //     })
-
-    // }
-
     create() {
 
+
+        
         // borders
         this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0,0)                                     
         this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0,0)     
@@ -73,79 +35,16 @@ class Play extends Phaser.Scene {
         // images
         this.park = this.add.tileSprite(0, 0, 14400, 9600, 'park').setOrigin(0,0).setScale(0.05)
         
-        // this.p1duck = new Duck(this, game.config.width/2, game.config.height- borderUISize - borderPadding - 100, 'duck-walk').setOrigin(0.5, 0)
         this.p1duck = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 200, 'duck-walk').setOrigin(0.5, 0).setScale(1.4)
         this.p1duck.setCircle(this.p1duck.width / 2.8).setOffset(this.p1duck.width / 6, this.p1duck.width / 20)
-        // this.banana = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 300, 'banana').setScale(0.02)
-        this.grapes = this.physics.add.sprite(350, game.config.height- borderUISize - borderPadding - 200, 'grapes').setScale(0.02)
-        this.watermelon = this.physics.add.sprite(150, game.config.height- borderUISize - borderPadding - 350, 'watermelon').setScale(0.017)
-        
 
-        this.can = this.physics.add.sprite(350, game.config.height- borderUISize - borderPadding - 200, 'can').setScale(0.017)
-        this.chips = this.physics.add.sprite(350, game.config.height- borderUISize - borderPadding - 300, 'chips').setScale(0.045)
-        // this.chips.setSize(this.chips.width / 1.7, this.chips.height / 2)
-        // this.chips.setOffset(this.chips.width / 5 - 82, this.chips.height / 3)
+        this.fruitGroup = this.physics.add.group({
+            runChildUpdate: true
+        })
 
-        // this.trash = this.physics.add.sprite(350, game.config.height- borderUISize - borderPadding - 200, 'trash-bag')  
-        // this.trash.setSize(920, 600).setOffset(this.trash.width / 15, this.trash.height / 3 + 30)
-        // console.log('og trash')
-        // console.log(this.trash.width / 15)
-        // this.trash.setScale(0.07).setOrigin(0)
-
-
-        // ideal tree size
-        // this.tree = this.add.image(100, 100, 'tree').setScale(0.09)
-
-
-        this.bananasss = this.physics.add.group();
-
-        // per trash or whole group ??
         this.trashGroup = this.physics.add.group({
             runChildUpdate: true    // make sure update runs on group children
         })
-
-        // make delayed call ?? or initially 3, then delayed ?
-        for (var i = 1; i < 16; i++) {
-            var x = Phaser.Math.RND.between(0, game.config.width);
-            var y = Phaser.Math.RND.between(200, game.config.height);
-            var banan = this.physics.add.sprite((i % 7) * x, y, 'banana').setScale(0.02).setImmovable(true);
-            // banan.num = this.BANANA_COUNT
-
-            banan.setOffset(banan.width / 4, banan.height / 4).setSize(banan.width / 5, banan.height / 2)
-
-            this.bananasss.add(banan)
-            // this.BANANA_COUNT += 1
-        }
-
-        // var i = 0
-        // this.time.addEvent({ delay: 175, callback: () => {
-
-        //     var x = Phaser.Math.RND.between(0, game.config.width);
-        //     var y = Phaser.Math.RND.between(200, game.config.height);
-        //     var banan = this.physics.add.sprite((i % 7) * x, y, 'banana').setScale(0.02).setImmovable(true);
-        //     // banan.num = this.BANANA_COUNT
-
-        //     banan.setOffset(banan.width / 4, banan.height / 4).setSize(banan.width / 5, banan.height / 2)
-        //     i += 1
-
-        //     this.bananasss.add(banan) 
-        // }})
-
-        // changing physics sizes
-        // this.banana.setCircle(this.banana.width / 5)
-
-        // this.banana.setSize(this.banana.width / 2, this.banana.height / 2)
-        // this.banana.setOffset(this.banana.width / 5, this.banana.height / 4)
-
-        this.grapes.setSize(this.grapes.width / 2, this.grapes.height / 1.5 )
-        this.grapes.setOffset(500, 600)
-        
-        this.watermelon.setSize(this.watermelon.width - 10, this.watermelon.height / 2 + 200)
-        this.watermelon.setOffset(0, 950)
-
-        // this.can.setSize(this.can.width / 1.75, this.can.height / 2 - 200)
-        // this.can.setOffset(350, 750)
-
 
 
         // start animation
@@ -181,6 +80,8 @@ class Play extends Phaser.Scene {
         this.p1duck.trashCount = 0
     
 
+        this.addFruit()
+
         this.time.delayedCall(this.obstacleSpawnDelay, () => { 
             this.addBarrier() 
         })
@@ -195,53 +96,70 @@ class Play extends Phaser.Scene {
 
         // // set up cursor keys
         // cursors = this.input.keyboard.createCursorKeys()
+
+
+        this.physics.add.collider(this.p1duck, this.fruitGroup, this.handleFruitCollision, null, this, this.fruitGroup)
+        this.physics.add.collider(this.p1duck, this.trashGroup, this.handleTrashCollision, null, this, this.trashGroup)
+
+
     }
 
 
-    // Bookmark v
 
     addBarrier() {
         var index = Phaser.Math.RND.between(0, 2);
         var trashPicked = trashTypes[index]
 
-        // console.log(trashPicked)
         let trash = new Trash(this, trashPicked, this.TRASH_SPEED)
 
-        // trash.x = randomX
-        // trash.y = randomY
-
         if(trashPicked == 'chips'){
-            console.log('cheeps')
             trash.setScale(0.045)
         }
         else if(trashPicked == 'can') {
-            console.log('can')
             trash.setScale(0.017)
             trash.body.setSize(trash.width / 1.75, trash.height / 2 - 200)
             trash.body.setOffset(350, 750)
         }
         else{
-            console.log('trash-bag')
             trash.body.setSize(920, 600)
             trash.body.setOffset(trash.width / 15, trash.height / 3 + 30)
             trash.setScale(0.06)
             trash.setOrigin(0)
         }
         this.trashGroup.add(trash)
-        // trash.x = game.config.width / 2
-        // trash.y = game.config.height / 2
+    }
+
+    addFruit() {
+        var index = Phaser.Math.RND.between(0, 2);
+        var fruitPicked = fruitTypes[index]
+
+        let fruit = new Fruit(this, fruitPicked, SCROLL_SPEED)
+
+        if(fruitPicked == 'banana'){
+            console.log('banana')
+            fruit.body.setCircle(fruit.width / 5)
+            fruit.body.setSize(fruit.width / 2, fruit.height / 2)
+            fruit.body.setOffset(fruit.width / 5, fruit.height / 4)
+            fruit.setScale(0.02)
+
+        }
+        else if(fruitPicked == 'grapes') {
+            fruit.setScale(0.02)
+            fruit.body.setSize(fruit.width / 2, fruit.height / 1.5 )
+            fruit.body.setOffset(500, 600) 
+        }
+        else{
+            fruit.setScale(0.017)
+            fruit.body.setSize(fruit.width - 350, fruit.height / 2 + 200)
+            fruit.body.setOffset(250, 900)
+
+        }
+        this.fruitGroup.add(fruit)
     }
 
 
     update() {
         this.park.tilePositionX += (5 * SCROLL_SPEED)
-
-        this.trashGroup.getChildren().forEach( (trash => {trash.x -= this.TRASH_SPEED}))
-        this.bananasss.getChildren().forEach( (banana => {banana.x -= SCROLL_SPEED}))
-        this.grapes.x -= SCROLL_SPEED
-        this.watermelon.x -= SCROLL_SPEED
-
-        // this.can.x -= this.TRASH_SPEED
 
         if(this.p1duck.trashCount >=3) {
             // change scene to game over
@@ -267,47 +185,21 @@ class Play extends Phaser.Scene {
         }
         playerVector.normalize()
         this.p1duck.setVelocity(this.PLAYER_VELOCITY * playerVector.x, this.PLAYER_VELOCITY * playerVector.y)
-        
 
-        // // this.park.tilePositionX -= 3.5
-        // if(!this.gameOver) {
-        //     this.p1duck.update()
+
+
+        // major bookmark
+
+        // if player points = 100, increase game speed 1.5 ?
+        // if(this.p1Score % 100 == 0){
+        //     this.SCROLL_SPEED *= 1.2
+        //     this.PLAYER_VELOCITY *= 1.2
+        //     console.log('scroll speed, player velocity')
+
         // }
 
 
-        // destroying would destroy every instance,, need to change so it deletes the single instance
-        // this.physics.add.collider(this.p1duck, this.banana, this.handleFruitCollision, null, this, this.banana)
-        this.physics.add.collider(this.p1duck, this.grapes, this.handleFruitCollision, null, this, this.grapes)
-        // this.physics.add.collider(this.p1duck, this.watermelon, this.handleFruitCollision, null, this, this.watermelon)
-        // this.physics.add.collider(this.p1duck, this.can, this.handleTrashCollision, null, this, this.can)
-        
-        this.physics.add.collider(this.p1duck, this.can, this.handleTrashCollision, null, this, this.can)
-
-        this.physics.add.collider(this.p1duck, this.bananasss, this.handleFruitCollision, null, this, this.bananasss)
-        this.physics.add.collider(this.p1duck, this.trashGroup, this.handleTrashCollision, null, this, this.trashGroup)
-
-                // Simulate scrolling
-                // subtract from y pos every update per
-                // obstacle
-                // fruit
-                // background
-
-
-        this.bananasss.getChildren().forEach(banana => {
-            if(banana.x < -banana.x - 100){
-                banana.destroy()
-                // console.log('bye bye banana')
-            }
-            if(this.grapes.x < -this.grapes.x - 100){
-                this.grapes.destroy()
-            }
-            }
-        )
-
-
     }
-
-
 
     handleFruitCollision(duck, fruit){
     
@@ -332,13 +224,9 @@ class Play extends Phaser.Scene {
         this.sound.play('ping')
         this.p1duck.trashCount += 1
         this.PLAYER_VELOCITY = 100
-        console.log(trash)
-        
     }
 
 }
-
-
 
 
 
