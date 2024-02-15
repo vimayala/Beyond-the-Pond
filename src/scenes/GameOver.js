@@ -4,7 +4,6 @@ class GameOver extends Phaser.Scene {
         }
 
         create() {
-    
             this.sound.play('game-over')
 
             let controlsConfig = {
@@ -69,20 +68,9 @@ class GameOver extends Phaser.Scene {
                 this.sound.play('click')
                 this.scene.start('menuScene') 
             })
-   
         }
     
         update() {
             this.clouds.tilePositionX += 4
-            // if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
-    
-            //     game.settings = {
-            //         // spaceshipSpeed: 3,
-            //     }
-    
-            //     // this.sound.play('sfx-select')
-            //     this.scene.start('playScene')
-            // }
-    
         }
     }

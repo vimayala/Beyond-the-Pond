@@ -1,4 +1,4 @@
-- [ ] In main.js (or equivalent), include a comment header with your name, game title, approximate hours spent on project, and your creative tilt justification (see below) (1)
+- [X] In main.js (or equivalent), include a comment header with your name, game title, approximate hours spent on project, and your creative tilt justification (see below) (1)
 
 - [X] Use multiple Scene classes (dictated by your game's style) (1)
 - [X] Properly transition between Scenes and allow the player to restart w/out having to reload the page (1)

@@ -51,11 +51,9 @@ class Menu extends Phaser.Scene {
             startFrame: 0,
             endFrame: 8
         })
-
     }
 
     create() {
-
         this.anims.create({
             key: 'trash-stinky',
             frameRate: 4,
@@ -75,7 +73,6 @@ class Menu extends Phaser.Scene {
                 end: 11
             })
         })
-
 
         this.anims.create({
             key: 'idle',
@@ -127,22 +124,18 @@ class Menu extends Phaser.Scene {
         this.add.text(game.config.width/2, height + 126, 'Controls', menuConfig).setOrigin(0.5)
         this.add.text(game.config.width/2, height + 175, 'Credits', menuConfig).setOrigin(0.5)
 
-        // this.credits = this.add.image(game.config.width/2, game.config.height/2 - borderUISize - borderPadding + 175,'button').setScale(0.1)
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT)
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT)
-
         
         this.mySong = this.sound.add('waiting', {loop: true, volume: 0.8})
         this.mySong.play()
 
         this.begin.on('pointerdown', () => {
-            // play sfx
             this.mySong.stop()
             this.sound.play('click')
             this.scene.start('playScene') 
         })
         this.controls.on('pointerdown', () => {
-            // play sfx
             this.mySong.stop()
             this.sound.play('click')
             this.scene.start('controlScene') 
@@ -153,7 +146,6 @@ class Menu extends Phaser.Scene {
             this.sound.play('click')
             this.scene.start('creditsScene') 
         })
-
     }
 
     update() {

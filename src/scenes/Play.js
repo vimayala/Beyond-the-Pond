@@ -14,7 +14,6 @@ class Play extends Phaser.Scene {
     }
 
     create() {
-
         // borders
         this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0,0)                                     
         this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0,0)     
@@ -86,10 +85,7 @@ class Play extends Phaser.Scene {
 
         this.mySong = this.sound.add('beyond', {loop: true, volume: 0.8})
         this.mySong.play()
-
     }
-
-
 
     addBarrier() {
         var index = Phaser.Math.RND.between(0, 2);
@@ -161,17 +157,13 @@ class Play extends Phaser.Scene {
         }
         playerVector.normalize()
         this.p1duck.setVelocity(this.PLAYER_VELOCITY * playerVector.x, this.PLAYER_VELOCITY * playerVector.y)
-
     }
 
     handleFruitCollision(duck, fruit){
-    
         fruit.destroy()
         this.sound.play('collect')
         playerScore += 5
         this.scoreLeft.text = playerScore
-        // this.PLAYER_VELOCITY *= 1.05
-    
     }
     
     handleTrashCollision(duck, trash){
@@ -193,7 +185,6 @@ class Play extends Phaser.Scene {
         else{
             this.lives.setFrame(this.p1duck.trashCount)
         }
-
         this.PLAYER_VELOCITY = 100
     }
 
