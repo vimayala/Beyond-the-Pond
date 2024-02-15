@@ -60,8 +60,8 @@ class Credits extends Phaser.Scene {
 
         controlsConfig.color = '#FFFFFF'
 
-        this.mySong.stop()
-        this.sound.play('click')
+        this.mySong = this.sound.add('waiting', {loop: true, volume: 0.8})
+        this.mySong.play()
 
         this.begin.on('pointerdown', () => {
             this.mySong.stop()
@@ -73,9 +73,6 @@ class Credits extends Phaser.Scene {
             this.sound.play('click')
             this.scene.start('menuScene') 
         })
-
-        this.mySong = this.sound.add('waiting', {loop: true, volume: 0.8})
-        this.mySong.play()
 
     }
 
