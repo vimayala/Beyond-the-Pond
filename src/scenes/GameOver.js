@@ -7,7 +7,6 @@ class GameOver extends Phaser.Scene {
     
             this.sound.play('game-over')
 
-
             let controlsConfig = {
                 fontFamily: 'American Typewriter',
                 fontSize: '64px', 
@@ -22,7 +21,6 @@ class GameOver extends Phaser.Scene {
             this.clouds = this.add.tileSprite(0, 0, 14400, 9600, 'clouds').setOrigin(0,0).setScale(0.05)
             this.test = this.add.image(game.config.width/2, game.config.height/2 - borderPadding - 5, 'blue').setScale(0.9, 0.75).setAlpha(0.85)
             
-            var height = game.config.height/2 - borderUISize - borderPadding
             this.add.text(game.config.width/2, borderUISize + borderPadding / 0.2, 'Game Over!', controlsConfig).setOrigin(0.5)
             controlsConfig.fontSize = '48px'
             this.add.text(game.config.width/2, (borderUISize + borderPadding) / 0.25, `Your score was`, controlsConfig).setOrigin(0.5)
@@ -64,27 +62,6 @@ class GameOver extends Phaser.Scene {
             })
     
             controlsConfig.color = '#FFFFFF'
-    
-            // this.add.text(game.config.width/8, height - 75, 'Move up', controlsConfig).setOrigin(0)
-            // this.add.text(game.config.width/8, height - 40, 'Move down', controlsConfig).setOrigin(0)
-            // this.add.text(game.config.width/8, height + 45, 'Gain points by collecting fruits!', controlsConfig).setOrigin(0)
-            // this.add.text(game.config.width/8, height + 130, 'Avoid the trash!', controlsConfig).setOrigin(0)
-            // this.add.text(game.config.width/8, height + 165, 'After running into three pieces, you lose!', controlsConfig).setOrigin(0)
-    
-            // controlsConfig.fontSize = '24px'
-    
-    
-            // this.add.text(game.config.width/10, height - 110, 'To Control:', controlsConfig).setOrigin(0)
-            // this.add.text(game.config.width/10, height + 5, 'Points:', controlsConfig).setOrigin(0)
-            // this.add.text(game.config.width/5 - 15, height + 110, 'Obstacles:', controlsConfig).setOrigin(0.5)
-    
-    
-    
-    
-    
-    
-            // this.credits = this.add.image(game.config.width/2, game.config.height/2 - borderUISize - borderPadding + 175,'button').setScale(0.1)
-    
             this.begin.on('pointerdown', () => {
                 // play sfx
                 this.scene.start('playScene') 

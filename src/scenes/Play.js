@@ -36,7 +36,6 @@ class Play extends Phaser.Scene {
             runChildUpdate: true    // make sure update runs on group children
         })
 
-
         // start animation
         this.p1duck.play('walking')
 
@@ -70,6 +69,7 @@ class Play extends Phaser.Scene {
 
         this.addFruit()
 
+        // delayed call and difficulty timer taken from Nathan Altice's Paddle Parkour Method
         this.time.delayedCall(this.obstacleSpawnDelay, () => { 
             this.addBarrier() 
         })
@@ -123,7 +123,6 @@ class Play extends Phaser.Scene {
         let fruit = new Fruit(this, fruitPicked, this.SCROLL_SPEED)
 
         if(fruitPicked == 'banana'){
-            console.log('banana')
             fruit.body.setCircle(fruit.width / 5)
             fruit.body.setSize(fruit.width / 2, fruit.height / 2)
             fruit.body.setOffset(fruit.width / 5, fruit.height / 4)
@@ -150,17 +149,14 @@ class Play extends Phaser.Scene {
         this.park.tilePositionX += (2)       // Stay at initial scroll speed
         
         let playerVector = new Phaser.Math.Vector2(0, 0)
-        let playerDirection = 'down'
         if(this.p1duck.y >= 135){
             if(cursors.up.isDown){
                 playerVector.y = -1
-                playerDirection = 'up'
             }
         }
         if(this.p1duck.y <= 400){
             if(cursors.down.isDown){
                 playerVector.y = 1
-                playerDirection = 'down'
             }
         }
         playerVector.normalize()
@@ -196,7 +192,6 @@ class Play extends Phaser.Scene {
         }
         else{
             this.lives.setFrame(this.p1duck.trashCount)
-            console.log(this.p1duck.trashCount)
         }
 
         this.PLAYER_VELOCITY = 100
@@ -212,7 +207,6 @@ class Play extends Phaser.Scene {
                 // this.PLAYER_VELOCITY *= 1.05
             }
             else if (this.TRASH_SPEED > 4 && this.mode == 'easy'){
-                // console.log('middle')
                 this.harderMode = this.time.addEvent({
                     delay: 10000,
                     callback: this.addBarrier,
@@ -224,7 +218,6 @@ class Play extends Phaser.Scene {
                 this.mySong.setRate(1.02)
             }
             else if(this.mode == 'middle' && playerScore > 300){
-                // console.log('end')
                 this.PLAYER_VELOCITY = 100
                 this.mode = 'end'
                 this.mySong.setRate(1.05)
