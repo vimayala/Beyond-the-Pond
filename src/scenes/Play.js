@@ -225,8 +225,3 @@ class Play extends Phaser.Scene {
         }
     }
 }
-
-
-
-// increase player velocity for points attained
-// reset player velocity when colliding with obstacle

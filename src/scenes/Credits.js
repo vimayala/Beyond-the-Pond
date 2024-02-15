@@ -59,15 +59,19 @@ class Credits extends Phaser.Scene {
 
         controlsConfig.color = '#FFFFFF'
 
+        this.mySong.stop()
+        this.sound.play('click')
+
         this.begin.on('pointerdown', () => {
-            // play sfx
+            this.mySong.stop()
+            this.sound.play('click')
             this.scene.start('playScene') 
         })
         this.menu.on('pointerdown', () => {
-            // play sfx
+            this.mySong.stop()
+            this.sound.play('click')
             this.scene.start('menuScene') 
         })
-
 
 
     }

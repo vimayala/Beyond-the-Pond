@@ -2,7 +2,7 @@ class GameOver extends Phaser.Scene {
         constructor() {
             super('gameOverScene')
         }
-    
+
         create() {
     
             this.sound.play('game-over')
@@ -35,24 +35,23 @@ class GameOver extends Phaser.Scene {
 
             controlsConfig.fontSize = '24px'
             this.add.text(game.config.width/2, (borderUISize + borderPadding) / 0.12, message, controlsConfig).setOrigin(0.5)
-
-
             
             controlsConfig.fontSize = '72px'
             this.add.text(game.config.width/2, (borderUISize + borderPadding) / 0.15, `${playerScore}`, controlsConfig).setOrigin(0.5)
-
 
             playerScore = 0
 
             controlsConfig.fontSize = '18px'
             controlsConfig.color = '#000000'
     
-    
             this.begin = this.add.image(3 * game.config.width/4, game.config.height - borderUISize - borderPadding,'frog-button').setScale(0.1)
             this.menu = this.add.image(game.config.width/4, game.config.height - borderUISize - borderPadding + 10,'button').setScale(0.1)
             this.add.text(3 * game.config.width/4, game.config.height - borderUISize - borderPadding + 10, 'Play Again', controlsConfig).setOrigin(0.5)
             this.add.text(game.config.width/4, game.config.height - borderUISize - borderPadding + 10, 'Menu', controlsConfig).setOrigin(0.5)
     
+            this.duck = this.add.sprite(game.config.width/6, (borderUISize + borderPadding) / 0.15, 'duck-idle').setScale(2)
+            this.duck.play('idle')
+
             this.menu.setInteractive({
                 useHandCursor: true
             })
@@ -63,16 +62,14 @@ class GameOver extends Phaser.Scene {
     
             controlsConfig.color = '#FFFFFF'
             this.begin.on('pointerdown', () => {
-                // play sfx
+                this.sound.play('click')
                 this.scene.start('playScene') 
             })
             this.menu.on('pointerdown', () => {
-                // play sfx
+                this.sound.play('click')
                 this.scene.start('menuScene') 
             })
    
-
-
         }
     
         update() {

@@ -76,6 +76,17 @@ class Menu extends Phaser.Scene {
             })
         })
 
+
+        this.anims.create({
+            key: 'idle',
+            frameRate: 4,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('duck-idle', {
+                start: 0,
+                end: 8
+            })
+        })
+
         let menuConfig = {
             fontFamily: 'American Typewriter',
             fontSize: '48px', 
