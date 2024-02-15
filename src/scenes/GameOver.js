@@ -23,15 +23,20 @@ class GameOver extends Phaser.Scene {
             this.test = this.add.image(game.config.width/2, game.config.height/2 - borderPadding - 5, 'blue').setScale(0.9, 0.75).setAlpha(0.85)
             
             var height = game.config.height/2 - borderUISize - borderPadding
-    
-            // this.add.image(2.85 * game.config.width/4, height + 150, 'can').setScale(0.035)
-            // this.add.image(3.25 * game.config.width/4, height + 155, 'chips').setScale(0.05)
-            // this.add.image(3.65 * game.config.width/4, height + 150, 'trash-stinks').setScale(0.05)
-    
-            // this.test.setTint('0xFFFFFF')
             this.add.text(game.config.width/2, borderUISize + borderPadding / 0.2, 'Game Over!', controlsConfig).setOrigin(0.5)
             controlsConfig.fontSize = '48px'
             this.add.text(game.config.width/2, (borderUISize + borderPadding) / 0.25, `Your score was`, controlsConfig).setOrigin(0.5)
+
+            var message = 'Try again!'
+            if(playerScore > 100 && playerScore < 350){
+                message = "Good job!"
+            }
+            else if(playerScore >= 350){
+                message = "Amazing game!"
+            }
+
+            controlsConfig.fontSize = '24px'
+            this.add.text(game.config.width/2, (borderUISize + borderPadding) / 0.12, message, controlsConfig).setOrigin(0.5)
 
 
             
@@ -40,10 +45,6 @@ class GameOver extends Phaser.Scene {
 
 
             playerScore = 0
-
-            // if score 0-100, try again
-            // if 100-300, good game
-            //if 300+, amazing!
 
             controlsConfig.fontSize = '18px'
             controlsConfig.color = '#000000'

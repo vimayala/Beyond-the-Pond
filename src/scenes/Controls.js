@@ -28,18 +28,14 @@ class Controls extends Phaser.Scene {
         this.add.image(2.95 * game.config.width/4, height + 40, 'grapes').setScale(0.2)
         this.add.image(3.5 * game.config.width/4, height + 40, 'watermelon').setScale(0.2)
 
-
         this.add.image(2.85 * game.config.width/4, height + 150, 'can').setScale(0.035)
         this.add.image(3.25 * game.config.width/4, height + 155, 'chips').setScale(0.05)
         this.add.image(3.65 * game.config.width/4, height + 150, 'trash-stinks').setScale(0.05)
 
-        // this.test.setTint('0xFFFFFF')
         this.add.text(game.config.width/2, borderUISize + borderPadding + 25, 'Beyond the Pond', controlsConfig).setOrigin(0.5)
-
 
         controlsConfig.fontSize = '18px'
         controlsConfig.color = '#000000'
-
 
         this.begin = this.add.image(3 * game.config.width/4, game.config.height - borderUISize - borderPadding,'frog-button').setScale(0.1)
         this.menu = this.add.image(game.config.width/4, game.config.height - borderUISize - borderPadding + 10,'button').setScale(0.1)
@@ -64,19 +60,14 @@ class Controls extends Phaser.Scene {
 
         controlsConfig.fontSize = '24px'
 
-
         this.add.text(game.config.width/10, height - 110, 'To Control:', controlsConfig).setOrigin(0)
         this.add.text(game.config.width/10, height + 5, 'Points:', controlsConfig).setOrigin(0)
         this.add.text(game.config.width/5 - 15, height + 110, 'Obstacles:', controlsConfig).setOrigin(0.5)
 
-
         this.mySong = this.sound.add('waiting', {loop: true, volume: 0.8})
         this.mySong.play()
 
-        // this.credits = this.add.image(game.config.width/2, game.config.height/2 - borderUISize - borderPadding + 175,'button').setScale(0.1)
-
         this.begin.on('pointerdown', () => {
-            // play sfx
             this.mySong.stop()
             this.sound.play('click')
             this.scene.start('playScene') 
@@ -91,15 +82,6 @@ class Controls extends Phaser.Scene {
 
     update() {
         this.clouds.tilePositionX += 4
-        // if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
-
-        //     game.settings = {
-        //         // spaceshipSpeed: 3,
-        //     }
-
-        //     // this.sound.play('sfx-select')
-        //     this.scene.start('playScene')
-        // }
 
     }
 }

@@ -25,19 +25,14 @@ let config = {
 }
 
 let game = new Phaser.Game(config)
-let keyFIRE, keyRESET, keyLEFT, keyRIGHT, cursors
+let keyLEFT, keyRIGHT, cursors
 
 const trashTypes = ['chips', 'can', 'trash-bag']
 const fruitTypes = ['banana', 'grapes', 'watermelon']
-
-// let SCROLL_SPEED = 1.75
 
 let borderUISize = game.config.height / 15
 let borderPadding = borderUISize / 3
 
 var playerScore = 0
-
-// var difficulty = 0
-// var last_score = 0
 
 let { height, width } = game.config

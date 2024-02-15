@@ -11,7 +11,6 @@ class Menu extends Phaser.Scene {
         this.load.audio('beyond', './assets/FarBeyondThe.m4a')
         this.load.audio('waiting', './assets/Waiting.m4a')
 
-
         this.load.image('clouds', 'assets/clouds.png')              // images
         this.load.image('park', 'assets/park.png')
         this.load.image('blue', 'assets/park-temp.png')
@@ -26,7 +25,6 @@ class Menu extends Phaser.Scene {
         this.load.image('frog-button', 'assets/frog-button.PNG')    
         this.load.image('up', 'assets/up.png')                  
         this.load.image('down', 'assets/down.png')
-
 
         this.load.spritesheet('trash-stinks', './assets/trash-stinks.png', {
             frameWidth: 1280,
@@ -68,7 +66,6 @@ class Menu extends Phaser.Scene {
             })
         })
 
-
         this.anims.create({
             key: 'walking',
             frameRate: 8,
@@ -95,7 +92,6 @@ class Menu extends Phaser.Scene {
         this.box = this.add.image(game.config.width/2, game.config.height/2 + borderPadding + borderUISize, 'blue').setScale(0.65, 0.5)
         this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding - 15, 'Beyond the Pond', menuConfig).setOrigin(0.5)
 
-
         menuConfig.fontSize = '18px'
         menuConfig.color = '#000000'
         menuConfig.backgroundColor = '#FFFFFF00'
@@ -119,7 +115,6 @@ class Menu extends Phaser.Scene {
         this.add.text(game.config.width/2, height + 75, 'Play', menuConfig).setOrigin(0.5)
         this.add.text(game.config.width/2, height + 126, 'Controls', menuConfig).setOrigin(0.5)
         this.add.text(game.config.width/2, height + 175, 'Credits', menuConfig).setOrigin(0.5)
-
 
         // this.credits = this.add.image(game.config.width/2, game.config.height/2 - borderUISize - borderPadding + 175,'button').setScale(0.1)
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT)
@@ -152,15 +147,5 @@ class Menu extends Phaser.Scene {
 
     update() {
         this.clouds.tilePositionX += 4
-        // if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
-
-        //     game.settings = {
-        //         // spaceshipSpeed: 3,
-        //     }
-
-        //     // this.sound.play('sfx-select')
-        //     this.scene.start('playScene')
-        // }
-
     }
 }

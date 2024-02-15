@@ -14,7 +14,7 @@
 - [X] Be theoretically endless (1)
 - [X] Be playable for at least 15 seconds for a new player of low to moderate skill (1)
 - [X] Run without significant crashes or errors (1)
-- [ ] Include in-game credits for all roles, assets, music, etc. (1)
+- [X] Include in-game credits for all roles, assets, music, etc. (1)
 
 Creative Tilt
 - [ ] ...do something technically interesting? Are you particularly proud of a programming technique you implemented? Did you look beyond the class examples and learn how to do something new? (1)

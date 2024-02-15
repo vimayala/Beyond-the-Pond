@@ -41,8 +41,6 @@ class Play extends Phaser.Scene {
         this.p1duck.play('walking')
 
         // keys defined
-        keyFIRE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F)
-        keyRESET = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R)
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT)
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT)
         cursors = this.input.keyboard.createCursorKeys()
@@ -83,11 +81,6 @@ class Play extends Phaser.Scene {
             callbackScope: this,
             loop: true
         })
-
-        // // set up cursor keys
-        // cursors = this.input.keyboard.createCursorKeys()
-
-
         this.physics.add.collider(this.p1duck, this.fruitGroup, this.handleFruitCollision, null, this, this.fruitGroup)
         this.physics.add.collider(this.p1duck, this.trashGroup, this.handleTrashCollision, null, this, this.trashGroup)
 
