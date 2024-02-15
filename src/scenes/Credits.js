@@ -4,6 +4,7 @@ class Credits extends Phaser.Scene {
     }
 
     create() {
+
         let controlsConfig = {
             fontFamily: 'American Typewriter',
             fontSize: '48px', 
@@ -73,6 +74,8 @@ class Credits extends Phaser.Scene {
             this.scene.start('menuScene') 
         })
 
+        this.mySong = this.sound.add('waiting', {loop: true, volume: 0.8})
+        this.mySong.play()
 
     }
 
