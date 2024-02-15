@@ -10,7 +10,7 @@ class Credits extends Phaser.Scene {
 
         let controlsConfig = {
             fontFamily: 'American Typewriter',
-            fontSize: '64px', 
+            fontSize: '48px', 
             color: '#FFFFFF',
             align: 'right', padding: {
                 top: 5,
@@ -30,29 +30,30 @@ class Credits extends Phaser.Scene {
 
         // this.test.setTint('0xFFFFFF')
         this.add.text(game.config.width/2, borderUISize + borderPadding / 0.2, 'Credits:', controlsConfig).setOrigin(0.5)
-        controlsConfig.fontSize = '48px'
+        controlsConfig.fontSize = '24px'
 
         // this.load.audio('ping', 'assets/zapsplat_multimedia_game_sound_childrens_collect_grab_single_norification_ping_soft_002_49762.mp3')
         // this.load.audio('click', 'assets/zapsplat_multimedia_game_sound_childrens_collect_grab_single_norification_ping_soft_001_49806.mp3')
         // this.load.audio('game-over', './assets/zapsplat_multimedia_game_sound_error_lose_thud_negative_001_74526.mp3')
 
-        this.add.text(game.config.width/2, (borderUISize + borderPadding) / 0.25, `All Sound FXs: Zapsplat`, controlsConfig).setOrigin(0.5)
-        this.add.text(game.config.width/2, (borderUISize + borderPadding) / 0.25, `Audios:`, controlsConfig).setOrigin(0.5)
-        this.add.text(game.config.width/2, (borderUISize + borderPadding) / 0.25, `• Game Sound Collect Treasure Coin 001:`, controlsConfig).setOrigin(0.5)
-        this.add.text(game.config.width/2, (borderUISize + borderPadding) / 0.25, `• Children’s game tone, collect or grab item, single notification, soft ping 1 Sound Effect`, controlsConfig).setOrigin(0.5)
-        this.add.text(game.config.width/2, (borderUISize + borderPadding) / 0.25, `• Children’s game tone, collect or grab item, single notification, soft ping 2 Sound Effect`, controlsConfig).setOrigin(0.5)
-        this.add.text(game.config.width/2, (borderUISize + borderPadding) / 0.25, `• Game sound, thud, error, lose, negative 1`, controlsConfig).setOrigin(0.5)
+        this.add.text(game.config.width/8, (borderUISize + borderPadding) / 0.225, `All Sound FXs: Zapsplat`, controlsConfig).setOrigin(0)
 
 
+        this.add.text(game.config.width/8, (borderUISize + borderPadding) / 0.275, `Assets created on Resprite`, controlsConfig).setOrigin(0)
+        this.add.text(game.config.width/8, (borderUISize + borderPadding) / 0.35, `Music created on Garage Band`, controlsConfig).setOrigin(0)
 
-        this.add.text(game.config.width/2, (borderUISize + borderPadding) / 0.25, `Assets created on Resprite`, controlsConfig).setOrigin(0.5)
-        this.add.text(game.config.width/2, (borderUISize + borderPadding) / 0.25, `Music created on Garage Band`, controlsConfig).setOrigin(0.5)
+        controlsConfig.fontSize = '14px'
 
+        this.add.text(game.config.width/7, (borderUISize + borderPadding) / 0.19, `Audios:`, controlsConfig).setOrigin(0)
+        this.add.text(game.config.width/6, (borderUISize + borderPadding) / 0.175, `• Game Sound Collect Treasure Coin 001:`, controlsConfig).setOrigin(0)
+        this.add.text(game.config.width/6, (borderUISize + borderPadding) / 0.160, `• Children’s game tone, collect or grab item, single notification, soft ping 1 Sound Effect`, controlsConfig).setOrigin(0)
+        this.add.text(game.config.width/6, (borderUISize + borderPadding) / 0.145, `• Children’s game tone, collect or grab item, single notification, soft ping 2 Sound Effect`, controlsConfig).setOrigin(0)
+        this.add.text(game.config.width/6, (borderUISize + borderPadding) / 0.132, `• Game sound, thud, error, lose, negative 1`, controlsConfig).setOrigin(0)
 
 
         
-        controlsConfig.fontSize = '72px'
-        this.add.text(game.config.width/2, (borderUISize + borderPadding) / 0.15, `${playerScore}`, controlsConfig).setOrigin(0.5)
+        // controlsConfig.fontSize = '72px'
+        // this.add.text(game.config.width/2, (borderUISize + borderPadding) / 0.15, `${playerScore}`, controlsConfig).setOrigin(0.5)
 
 
         playerScore = 0

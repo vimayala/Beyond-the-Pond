@@ -7,7 +7,7 @@
 - [X] Include one or more animated characters that use a texture atlas* (1)
 - [X] Simulate scrolling with a tileSprite (or equivalent means) (1)
 - [X] Implement proper collision detection (via Arcade Physics or a custom routine) (1)
-- [ ] Have looping background music* (1)
+- [X] Have looping background music* (1)
 - [X] Use a minimum of four sound effects for key mechanics, UI, and/or significant events appropriate to your game design (1)
 - [X] Use randomness to generate escalating challenge, e.g. terrain, pickups, etc. (1)
 - [X] Include some metric of accomplishment that a player can improve over time, e.g., score, survival time, etc. (1)
@@ -18,4 +18,4 @@
 
 Creative Tilt
 - [ ] ...do something technically interesting? Are you particularly proud of a programming technique you implemented? Did you look beyond the class examples and learn how to do something new? (1)
-- [ ] ...have a great visual style? Does it use music or art that you're particularly proud of? Are you trying something new or clever with the endless runner form? (1)
+- [X] ...have a great visual style? Does it use music or art that you're particularly proud of? Are you trying something new or clever with the endless runner form? (1)
